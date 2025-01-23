@@ -21,7 +21,7 @@ public class BotRcApplication {
         //SpringApplication.run(BotRcApplication.class, args);
         System.out.println("Hola chingao...");
 
-        String ip = "192.168.88.1";  // IP del router MikroTik
+        String ip = "192.168.1.1";  // IP del router MikroTik
         String user = "admin";       // Usuario del router
         String password = "your_password"; // Contraseña del router
 
@@ -40,6 +40,8 @@ public class BotRcApplication {
                 public void receive(Map<String, String> result) {
                     // Procesar los resultados de los clientes DHCP
                     System.out.println("Clientes DHCP registrados:");
+                    
+                    //Map es como un array pero con clave y valor
                     for (Map.Entry<String, String> entry : result.entrySet()) {
                         System.out.println(entry.getKey() + ": " + entry.getValue());
                     }
