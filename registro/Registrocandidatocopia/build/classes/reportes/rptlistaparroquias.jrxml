@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9812c7fe-9bb4-43a8-845b-9eb09ef7a355">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT edad_per, can_can FROM vistacandidatos]]>
+	</queryString>
+	<field name="edad_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="can_can" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="26" uuid="00c71f70-6561-448a-959c-152c708842e4"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO GENERAL DE JUNTAS PARROQUIALES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="5" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="6" width="555" height="30" uuid="3e19b67e-38b3-46dd-a84d-170fa9eab0ce"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="10" width="258" height="20" uuid="1722b778-7fdd-4592-b0c9-dadff1e95c5d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="10" width="271" height="20" uuid="026db225-fecb-47dc-a783-8ba9b7e078c3"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARROQUIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="f44d0acb-f806-41ce-92e8-850e54dc3f66"/>
+			</line>
+			<textField>
+				<reportElement x="1" y="2" width="257" height="20" uuid="38f9261a-b3da-42ea-aa22-65fd5f2425be"/>
+				<textFieldExpression><![CDATA[$F{can_can}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="283" y="2" width="270" height="20" uuid="2841edf9-9fd4-45ca-a120-e1d90b93129b"/>
+				<textFieldExpression><![CDATA[$F{edad_per}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

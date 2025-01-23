@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9812c7fe-9bb4-43a8-845b-9eb09ef7a355">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     candidatos.`dig_can` AS candidatos_dig_can,
+     candidatos.`pri_sec` AS candidatos_pri_sec,
+     candidatos.`can_can` AS candidatos_can_can,
+     candidatos.`dis_can` AS candidatos_dis_can,
+     datospersonales.`ced_per` AS datospersonales_ced_per,
+     datospersonales.`nom_per` AS datospersonales_nom_per,
+     datospersonales.`edad_per` AS datospersonales_edad_per,
+     candidatosgraficos.`par_can` AS candidatosgraficos_par_can,
+     candidatosgraficos.`votos` AS candidatosgraficos_votos
+FROM
+     `datospersonales` datospersonales INNER JOIN `candidatos` candidatos ON datospersonales.`ced_per` = candidatos.`ced_per`
+     INNER JOIN `candidatosgraficos` candidatosgraficos ON datospersonales.`ced_per` = candidatosgraficos.`ced_per`]]>
+	</queryString>
+	<field name="candidatos_dig_can" class="java.lang.String"/>
+	<field name="candidatos_pri_sec" class="java.lang.String"/>
+	<field name="candidatos_can_can" class="java.lang.String"/>
+	<field name="candidatos_dis_can" class="java.lang.String"/>
+	<field name="datospersonales_ced_per" class="java.lang.String"/>
+	<field name="datospersonales_nom_per" class="java.lang.String"/>
+	<field name="datospersonales_edad_per" class="java.lang.String"/>
+	<field name="candidatosgraficos_par_can" class="java.lang.String"/>
+	<field name="candidatosgraficos_votos" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="26" uuid="00c71f70-6561-448a-959c-152c708842e4"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO GENERAL DE CANDIDATOS ALCALDIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="336" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="336" uuid="952d2473-1251-4231-a8ec-18829bbe7a01"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{candidatosgraficos_votos}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{datospersonales_nom_per}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{candidatosgraficos_votos}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

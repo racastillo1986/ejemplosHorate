@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6fb26855-0e7a-473e-9562-96296a69dcb2">
+	<property name="ireport.zoom" value="1.100000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cedulapaciente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	`pacientes`.`id_pac`,
+	`pacientes`.`id_per`,
+	`personas`.`ced_per`,
+	`personas`.`nom_per`,
+	`personas`.`ape_per`,
+	`personas`.`fec_nac`,
+	`personas`.`edad_per`,
+	`personas`.`tel_per`,
+	`personas`.`dir_per`,
+	`personas`.`sex_per`,
+	`personas`.`est_civ`,
+	`personas`.`mail_per`,
+	`personas`.`rep_per`,
+	`personas`.`fec_ing`,
+	`anamnesis`.`id_ana`,
+	`anamnesis`.`tra_med`,
+	`anamnesis`.`obs_tra`,
+	`anamnesis`.`ing_med`,
+	`anamnesis`.`obs_ing`,
+	`anamnesis`.`rea_ale`,
+	`anamnesis`.`obs_rea`,
+	`anamnesis`.`hemo`,
+	`anamnesis`.`obs_hem`,
+	`anamnesis`.`irrad`,
+	`anamnesis`.`obs_irr`,
+	`anamnesis`.`sinu`,
+	`anamnesis`.`obs_sin`,
+	`anamnesis`.`enf_res`,
+	`anamnesis`.`obs_enf`,
+	`anamnesis`.`card`,
+	`anamnesis`.`obs_car`,
+	`anamnesis`.`diab`,
+	`anamnesis`.`obs_dia`,
+	`anamnesis`.`fie_reu`,
+	`anamnesis`.`obs_fie`,
+	`anamnesis`.`hepa`,
+	`anamnesis`.`obs_hep`,
+	`anamnesis`.`hiper`,
+	`anamnesis`.`obs_hip`,
+	`anamnesis`.`otras`,
+	`anamnesis`.`cepillado`,
+	`anamnesis`.`obs_cep`,
+	`anamnesis`.`seda`,
+	`anamnesis`.`obs_sed`,
+	`exaestomatologicos`.`id_exa`,
+	`exaestomatologicos`.`tem_exa`,
+	`exaestomatologicos`.`pul_exa`,
+	`exaestomatologicos`.`ten_exa`,
+	`exaestomatologicos`.`res_exa`,
+	`exaestomatologicos`.`art_exa`,
+	`exaestomatologicos`.`lab_exa`,
+	`exaestomatologicos`.`len_exa`,
+	`exaestomatologicos`.`pal_exa`,
+	`exaestomatologicos`.`pis_exa`,
+	`exaestomatologicos`.`car_exa`,
+	`exaestomatologicos`.`gla_exa`,
+	`exaestomatologicos`.`max_exa`,
+	`exaestomatologicos`.`sen_exa`,
+	`exaestomatologicos`.`mus_exa`,
+	`exaestomatologicos`.`sis_ner`,
+	`exaestomatologicos`.`sis_vas`,
+	`exaestomatologicos`.`lin_exa`,
+	`exaestomatologicos`.`fun_exa`,
+	`exaestomatologicos`.`obs_exa`,
+	`diagnosticos`.`id_dia`,
+	`diagnosticos`.`sup_num`,
+	`diagnosticos`.`abr_exad`,
+	`diagnosticos`.`man_exad`,
+	`diagnosticos`.`pat_pul`,
+	`diagnosticos`.`pla_bla`,
+	`diagnosticos`.`pla_cal`,
+	`diagnosticos`.`flu_den`,
+	`diagnosticos`.`otr_exad`,
+	`diagnosticos`.`obs_exad`,
+	`diagnosticos`.`cau_ext`,
+	`diagnosticos`.`fin_con`,
+	`diagnosticos`.`dia`,
+	`diagnosticos`.`pro`,
+	`diagnosticos`.`ope_tra`,
+	`diagnosticos`.`end_tra`,
+	`diagnosticos`.`per_tra`,
+	`diagnosticos`.`pro_tra`,
+	`diagnosticos`.`cir_tra`,
+	`diagnosticos`.`ort_tra`,
+	`diagnosticos`.`exo_tra`,
+	`diagnosticos`.`med_ora`,
+	`diagnosticos`.`otra_tra`,
+	`diagnosticos`.`pul_tra`,
+	`diagnosticos`.`pulpe_tra`,
+	`diagnosticos`.`exosim_tra`,
+	`detallediagnostico`.`id_det_dia`,
+	`detallediagnostico`.`id_dx`,
+	`dx`.`dx`
+FROM
+	`pacientes`,
+	`personas`,
+	`anamnesis`,
+	`exaestomatologicos`,
+	`diagnosticos`,
+	`detallediagnostico`,
+	`dx`
+WHERE
+	`pacientes`.`id_per` = `personas`.`id_per` AND
+	`anamnesis`.`id_pac` = `pacientes`.`id_pac` AND
+	`exaestomatologicos`.`id_pac` = `pacientes`.`id_pac` AND
+	`diagnosticos`.`id_pac` = `pacientes`.`id_pac` AND
+	`detallediagnostico`.`id_dia` = `diagnosticos`.`id_dia` AND
+	`detallediagnostico`.`id_dx` = `dx`.`id_dx`
+
+  AND
+`personas`.`ced_per` = $P{cedulapaciente}]]>
+	</queryString>
+	<field name="id_pac" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_per" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ced_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nom_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ape_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fec_nac" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="edad_per" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tel_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dir_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sex_per" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="est_civ" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mail_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rep_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fec_ing" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_ana" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tra_med" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ing_med" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_ing" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rea_ale" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_rea" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hemo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_hem" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="irrad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_irr" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sinu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_sin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="enf_res" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_enf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="card" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_car" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diab" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_dia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fie_reu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_fie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hepa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_hep" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hiper" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_hip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="otras" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cepillado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_cep" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="seda" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_sed" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_exa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tem_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pul_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ten_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="res_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="art_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lab_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="len_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pal_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pis_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="car_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gla_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="max_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sen_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mus_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sis_ner" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sis_vas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lin_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fun_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_exa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_dia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sup_num" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="abr_exad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="man_exad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pat_pul" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pla_bla" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pla_cal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="flu_den" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="otr_exad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs_exad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cau_ext" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fin_con" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ope_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="end_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="per_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pro_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cir_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ort_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="exo_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="med_ora" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="otra_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pul_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pulpe_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="exosim_tra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_det_dia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_dx" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dx" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="382" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="231" width="555" height="63" uuid="f621b7cd-f07a-4472-b97b-770f39aef6a7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="141" width="555" height="83" uuid="58bd0534-9ac1-42de-9cee-2f0a1ac9fbcc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="32" width="555" height="93" uuid="769894f5-0baf-41d1-b39f-45715c77eac0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="46" width="52" height="14" uuid="e95da397-0628-40de-b2cc-fb4501034f05"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="92" width="32" height="14" uuid="e32fc87c-8496-4edd-bda5-1bdfa51b791e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="10" width="227" height="22" forecolor="#0000CC" uuid="c230ed98-0914-42db-a824-641dfdacc9ad"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DEL PACIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="91" width="58" height="15" uuid="4be7de39-5a36-4dbc-829e-9102369fef6f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEDULA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="46" width="152" height="14" uuid="cc501633-2f49-4f53-9f8f-fc9c658f1043"/>
+				<textFieldExpression><![CDATA[$F{nom_per}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="46" width="174" height="14" uuid="94be9793-ba26-4244-bb7a-c73291085f47"/>
+				<textFieldExpression><![CDATA[$F{ape_per}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="92" width="100" height="14" uuid="4be124bd-eddc-4b57-b3c8-fed5ae9c3295"/>
+				<textFieldExpression><![CDATA[$F{edad_per}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="91" width="100" height="15" uuid="8a74ef98-9962-437f-90da-267e2212be8f"/>
+				<textFieldExpression><![CDATA[$F{ced_per}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="156" width="109" height="14" uuid="8689f242-0036-4fd1-a39f-03b14f9d8171"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[1. Supernumerarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="170" width="109" height="14" uuid="0ef438ac-df2f-4887-afb6-f93faf304832"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[2. Bruxismo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="184" width="109" height="14" uuid="05dfe085-71ea-49e5-bc61-ebb3dbedc301"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[3. Manchas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="156" width="98" height="14" uuid="c64e78c7-64d1-4593-bc29-65ef28bcbcc8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[7. Fluorosis Dental]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="184" width="115" height="14" uuid="c8b0e645-e966-4820-b872-2683371aeedd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[6. Calculo Dental]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="170" width="52" height="14" uuid="1f241db5-9800-4e4d-be77-df8130b79428"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[8. Otras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="170" width="115" height="14" uuid="21e3f6bd-26ad-42c9-9193-b7f500d0c788"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[5. Placa Bacteriana]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="156" width="115" height="14" uuid="3e15f3cc-7c50-496f-b0f1-685e27c9720e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4. Patologia Pulpar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="201" width="109" height="14" uuid="58d79da7-c476-4a6e-b961-ab82135f30d8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="127" width="109" height="14" uuid="61fdaca8-53ab-425b-8640-a4b0eb3eabe0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXAMEN DENTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="256" width="80" height="14" uuid="bb2bb9ae-9728-4420-b38b-26a99353c81d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIAGNOSTICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="240" width="100" height="14" uuid="6d4f5e2e-f2ca-46a9-9154-1946e500689e"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FINALIDAD CONSULTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="270" width="80" height="14" uuid="2e828bea-ba20-4ff8-a7d8-fae9dc4e7bf4"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRONOSTICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="240" width="80" height="14" uuid="47bd33e7-95e0-410f-a71d-85b675611a47"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAUSA EXTERNA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="129" y="156" width="74" height="14" uuid="65e6658c-5841-4808-8fd0-5b95e0948a88"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sup_num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="171" width="74" height="14" uuid="fabcab31-ac19-4ad9-8551-1096961a2ee2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{abr_exad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="184" width="74" height="14" uuid="22de974c-1016-42ae-a1a6-19d6705235e9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{man_exad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="157" width="65" height="13" uuid="cb3ce378-d33a-4482-8ef5-ec8c6dda5410"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pat_pul}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="170" width="65" height="14" uuid="2dd7c67f-f082-4e32-bf2b-4cecdc7e89e7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pla_bla}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="185" width="65" height="13" uuid="eac37365-66dc-4765-8d3f-dfae49419695"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pla_cal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="156" width="54" height="14" uuid="64c29192-12ce-47e6-96b7-1d084938a11d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{flu_den}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="185" width="152" height="13" uuid="3ce7f8fc-4f3d-4528-80b5-2a386d2793f9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otr_exad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="203" width="408" height="14" uuid="7ed45b5a-e565-44a4-a4df-4fc96b3b9649"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs_exad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="240" width="153" height="14" uuid="db61d0b6-b948-4d4f-8adc-562db4c182ca"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cau_ext}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="240" width="132" height="14" uuid="968f9943-b5f3-4acc-bfc1-609c53053bf7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fin_con}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="256" width="398" height="14" uuid="26d0b8b1-b494-4054-8214-f4d7ba4f42e1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="270" width="397" height="14" uuid="da93952f-ea68-43ba-bddc-dbfac6e7b17f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pro}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="305" width="557" height="76" uuid="3eadf0bf-b634-4ef0-8022-ccdb303e62fe"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="323" width="109" height="14" uuid="7ab358f1-45ce-4706-9f5b-1451bf042c92"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Medicina Oral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="309" width="109" height="14" uuid="10484902-c141-43ee-bcfd-9e7516c5be0b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operatoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="336" width="109" height="14" uuid="487dd15f-4e25-4ea5-845a-827d33df8008"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Protesis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="349" width="109" height="14" uuid="dd3d6a02-6c5b-4b6c-b920-d337d5514f8f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pulpectomia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="309" width="109" height="14" uuid="f007da15-f0a6-43f0-9610-79f43d556487"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endodoncia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="350" width="109" height="14" uuid="9336b793-182d-4ee2-8818-ebacdba6235e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exod. Simple]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="336" width="109" height="14" uuid="c29c2231-f1c3-42dc-a759-7119d3d0583e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cirujia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="323" width="109" height="14" uuid="570e5a84-d2b6-466e-a2fd-94c3b726e671"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ortodoncia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="309" width="109" height="14" uuid="1136a481-976b-4893-8837-5f5583d713e2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exodoncia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="364" width="109" height="14" uuid="f21e442a-9ea5-404d-a4d4-4fa0e3485cd0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="336" width="109" height="14" uuid="8bf65dab-18e9-4d8a-8787-4f8d4fc6228c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pulpotomia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="323" width="109" height="14" uuid="94a5aaf3-e97d-4559-8ced-be059810d14c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peridoncia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="349" width="39" height="15" uuid="ef0e7bfe-da69-40f3-ab09-7d93432e8cb4"/>
+				<textFieldExpression><![CDATA[$F{exosim_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="349" width="46" height="14" uuid="95d96ecb-73c5-46b9-a497-8df07b36ba7d"/>
+				<textFieldExpression><![CDATA[$F{pulpe_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="336" width="41" height="14" uuid="d43f5e5e-e3e6-413b-9c5a-afc52e267148"/>
+				<textFieldExpression><![CDATA[$F{pul_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="364" width="208" height="14" uuid="e12310a1-b523-417f-aa8e-041ade0d7697"/>
+				<textFieldExpression><![CDATA[$F{otra_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="310" width="46" height="13" uuid="1cf9b81f-c0d7-442e-93bb-06ed36636c02"/>
+				<textFieldExpression><![CDATA[$F{ope_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="283" y="309" width="39" height="14" uuid="7e1993f8-0df8-4c34-b7a1-55f8885ec28a"/>
+				<textFieldExpression><![CDATA[$F{end_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="323" width="48" height="14" uuid="a9703993-84bf-40b3-b765-3384a7dc6d0e"/>
+				<textFieldExpression><![CDATA[$F{med_ora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="309" width="40" height="14" uuid="00c516dc-5aa8-438d-ae29-56ef50429ba6"/>
+				<textFieldExpression><![CDATA[$F{exo_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="283" y="336" width="38" height="14" uuid="1531e98d-21b3-48cf-acc6-85699575fa4c"/>
+				<textFieldExpression><![CDATA[$F{cir_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="283" y="323" width="40" height="13" uuid="63952b8f-7081-4853-9db0-3eb11daa3f5f"/>
+				<textFieldExpression><![CDATA[$F{ort_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="336" width="46" height="13" uuid="26ad1f09-347b-4948-8fc5-1f234cf10066"/>
+				<textFieldExpression><![CDATA[$F{pro_tra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="323" width="40" height="13" uuid="b722f601-c118-4f15-ad4d-08cec21ae0c1"/>
+				<textFieldExpression><![CDATA[$F{per_tra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="4" width="106" height="14" uuid="29138c38-565b-465e-9424-867370d118e3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado Dx Principal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="209" height="18" uuid="578545ae-7ece-4ae9-986e-fbe9e97bfdac"/>
+			</rectangle>
+			<textField>
+				<reportElement x="75" y="1" width="123" height="17" uuid="5a6266ea-7440-4102-a867-038c08a6c9b6"/>
+				<textFieldExpression><![CDATA[$F{dx}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="1" width="32" height="14" uuid="f2d84f40-87cc-4965-a7dd-bc711aaef858"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dx]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

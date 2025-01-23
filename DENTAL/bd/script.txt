@@ -1,0 +1,1295 @@
+-- phpMyAdmin SQL Dump
+-- version 2.10.2
+-- http://www.phpmyadmin.net
+-- 
+-- Servidor: localhost
+-- Tiempo de generación: 05-09-2018 a las 15:22:49
+-- Versión del servidor: 5.0.45
+-- Versión de PHP: 5.2.3
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+-- 
+-- Base de datos: `historiaclinica`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `afecciones`
+-- 
+
+CREATE TABLE `afecciones` (
+  `id_afe` int(4) NOT NULL auto_increment,
+  `nom_afe` varchar(50) NOT NULL,
+  `contraindicaciones` varchar(250) default NULL,
+  PRIMARY KEY  (`id_afe`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `afecciones`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `anamnesis`
+-- 
+
+CREATE TABLE `anamnesis` (
+  `id_ana` int(4) NOT NULL auto_increment,
+  `id_pac` int(4) NOT NULL,
+  `tra_med` varchar(50) NOT NULL,
+  `obs_tra` varchar(200) NOT NULL,
+  `ing_med` varchar(50) NOT NULL,
+  `obs_ing` varchar(200) NOT NULL,
+  `rea_ale` varchar(50) NOT NULL,
+  `obs_rea` varchar(200) NOT NULL,
+  `hemo` varchar(50) NOT NULL,
+  `obs_hem` varchar(200) NOT NULL,
+  `irrad` varchar(50) NOT NULL,
+  `obs_irr` varchar(200) NOT NULL,
+  `sinu` varchar(50) NOT NULL,
+  `obs_sin` varchar(200) NOT NULL,
+  `enf_res` varchar(50) NOT NULL,
+  `obs_enf` varchar(200) NOT NULL,
+  `card` varchar(50) NOT NULL,
+  `obs_car` varchar(200) NOT NULL,
+  `diab` varchar(50) NOT NULL,
+  `obs_dia` varchar(200) NOT NULL,
+  `fie_reu` varchar(50) NOT NULL,
+  `obs_fie` varchar(200) NOT NULL,
+  `hepa` varchar(50) NOT NULL,
+  `obs_hep` varchar(200) NOT NULL,
+  `hiper` varchar(50) NOT NULL,
+  `obs_hip` varchar(200) NOT NULL,
+  `otras` varchar(250) NOT NULL,
+  `cepillado` varchar(50) NOT NULL,
+  `obs_cep` varchar(200) NOT NULL,
+  `seda` varchar(50) NOT NULL,
+  `obs_sed` varchar(200) NOT NULL,
+  PRIMARY KEY  (`id_ana`),
+  KEY `FK_anamnesis_pacientes` (`id_pac`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+-- 
+-- Volcar la base de datos para la tabla `anamnesis`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `citas`
+-- 
+
+CREATE TABLE `citas` (
+  `id_cit` int(4) NOT NULL auto_increment,
+  `id_pac` int(4) NOT NULL,
+  `fec_cit` varchar(50) NOT NULL,
+  `mot_cit` varchar(300) default NULL,
+  `cau_cit` varchar(300) default NULL,
+  PRIMARY KEY  (`id_cit`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `citas`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `detalleafeccionespac`
+-- 
+
+CREATE TABLE `detalleafeccionespac` (
+  `id_det` int(4) NOT NULL auto_increment,
+  `id_pac` int(4) NOT NULL,
+  `id_afe` int(4) NOT NULL,
+  PRIMARY KEY  (`id_det`),
+  KEY `FK_detalleafeccionespac_pacientes` (`id_pac`),
+  KEY `FK_detalleafeccionespac_afecciones` (`id_afe`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `detalleafeccionespac`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `detallecitas`
+-- 
+
+CREATE TABLE `detallecitas` (
+  `id_det` int(4) NOT NULL auto_increment,
+  `id_cit` int(4) NOT NULL,
+  `tra_det` varchar(50) NOT NULL,
+  `pie_det` varchar(50) NOT NULL,
+  `car_det` varchar(50) NOT NULL,
+  `obs_det` varchar(300) default NULL,
+  PRIMARY KEY  (`id_det`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- 
+-- Volcar la base de datos para la tabla `detallecitas`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `detallediagnostico`
+-- 
+
+CREATE TABLE `detallediagnostico` (
+  `id_det_dia` int(4) NOT NULL auto_increment,
+  `id_dia` int(4) NOT NULL,
+  `id_dx` int(4) NOT NULL,
+  PRIMARY KEY  (`id_det_dia`),
+  KEY `FK_detallediagnostico_diagnostico` (`id_dia`),
+  KEY `FK_detallediagnostico_DX` (`id_dx`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- 
+-- Volcar la base de datos para la tabla `detallediagnostico`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `detalletratamientos`
+-- 
+
+CREATE TABLE `detalletratamientos` (
+  `id_det_tra` int(4) NOT NULL auto_increment,
+  `id_tra` int(4) NOT NULL,
+  `id_prod` int(4) NOT NULL,
+  `nom_prod` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id_det_tra`),
+  KEY `FK_detalletratamientos_tra` (`id_tra`),
+  KEY `FK_detalletratamientos_prod` (`id_prod`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `detalletratamientos`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `diagnosticos`
+-- 
+
+CREATE TABLE `diagnosticos` (
+  `id_dia` int(4) NOT NULL auto_increment,
+  `id_pac` int(4) NOT NULL,
+  `sup_num` varchar(4) NOT NULL,
+  `abr_exad` varchar(4) NOT NULL,
+  `man_exad` varchar(4) NOT NULL,
+  `pat_pul` varchar(4) NOT NULL,
+  `pla_bla` varchar(4) NOT NULL,
+  `pla_cal` varchar(4) NOT NULL,
+  `flu_den` varchar(10) NOT NULL,
+  `otr_exad` varchar(300) NOT NULL,
+  `obs_exad` varchar(300) NOT NULL,
+  `cau_ext` varchar(50) NOT NULL,
+  `fin_con` varchar(50) NOT NULL,
+  `dia` varchar(300) NOT NULL,
+  `pro` varchar(300) NOT NULL,
+  `ope_tra` varchar(4) NOT NULL,
+  `end_tra` varchar(4) NOT NULL,
+  `per_tra` varchar(4) NOT NULL,
+  `pro_tra` varchar(4) NOT NULL,
+  `cir_tra` varchar(4) NOT NULL,
+  `ort_tra` varchar(4) NOT NULL,
+  `exo_tra` varchar(4) NOT NULL,
+  `med_ora` varchar(4) NOT NULL,
+  `otra_tra` varchar(250) default NULL,
+  `pul_tra` varchar(4) NOT NULL,
+  `pulpe_tra` varchar(4) NOT NULL,
+  `exosim_tra` varchar(4) NOT NULL,
+  PRIMARY KEY  (`id_dia`),
+  KEY `FK_diagnosticos_pacientes` (`id_pac`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- 
+-- Volcar la base de datos para la tabla `diagnosticos`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `dx`
+-- 
+
+CREATE TABLE `dx` (
+  `id_dx` int(4) NOT NULL auto_increment,
+  `dx` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id_dx`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+
+-- 
+-- Volcar la base de datos para la tabla `dx`
+-- 
+
+INSERT INTO `dx` VALUES (1, 'CARIE DENTINA');
+INSERT INTO `dx` VALUES (2, 'CARIE CRECIMIENTO');
+INSERT INTO `dx` VALUES (3, 'CARIE DETENIDA');
+INSERT INTO `dx` VALUES (4, 'CARIE LIMITADA AL ESMALTE');
+INSERT INTO `dx` VALUES (5, 'FRACTURA DENTAL');
+INSERT INTO `dx` VALUES (6, 'RETRACCION GINGIVIAL');
+INSERT INTO `dx` VALUES (7, 'CARIE DE PRIMERA INFANCIA');
+INSERT INTO `dx` VALUES (8, 'FRACTURA RADICULAR');
+INSERT INTO `dx` VALUES (9, 'ABSESO PERIAPICAL AGUDO');
+INSERT INTO `dx` VALUES (10, 'ABSESO PERIAPICAL CRONICO');
+INSERT INTO `dx` VALUES (11, 'PULPITIS AGUDA');
+INSERT INTO `dx` VALUES (12, 'PULPITIS CRONICA');
+INSERT INTO `dx` VALUES (13, 'ESTOMATITIS');
+INSERT INTO `dx` VALUES (14, 'GINGIVITIS');
+INSERT INTO `dx` VALUES (15, 'ENFERMEDAD PERIODONTAL');
+INSERT INTO `dx` VALUES (16, 'APIÑAMIENTO DENTAL');
+INSERT INTO `dx` VALUES (17, 'HIPOPLACIA DE ESMALTE');
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `exaestomatologicos`
+-- 
+
+CREATE TABLE `exaestomatologicos` (
+  `id_exa` int(4) NOT NULL auto_increment,
+  `id_pac` int(4) NOT NULL,
+  `tem_exa` varchar(50) NOT NULL,
+  `pul_exa` varchar(50) NOT NULL,
+  `ten_exa` varchar(50) NOT NULL,
+  `res_exa` varchar(50) NOT NULL,
+  `art_exa` varchar(50) NOT NULL,
+  `lab_exa` varchar(50) NOT NULL,
+  `len_exa` varchar(50) NOT NULL,
+  `pal_exa` varchar(50) NOT NULL,
+  `pis_exa` varchar(50) NOT NULL,
+  `car_exa` varchar(50) NOT NULL,
+  `gla_exa` varchar(50) NOT NULL,
+  `max_exa` varchar(50) NOT NULL,
+  `sen_exa` varchar(50) NOT NULL,
+  `mus_exa` varchar(50) NOT NULL,
+  `sis_ner` varchar(50) NOT NULL,
+  `sis_vas` varchar(50) NOT NULL,
+  `lin_exa` varchar(50) NOT NULL,
+  `fun_exa` varchar(50) NOT NULL,
+  `obs_exa` varchar(250) default NULL,
+  PRIMARY KEY  (`id_exa`),
+  KEY `FK_exaestomatologicos_paciente` (`id_pac`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+-- 
+-- Volcar la base de datos para la tabla `exaestomatologicos`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `imagencita`
+-- 
+
+CREATE TABLE `imagencita` (
+  `id_ima` int(4) NOT NULL auto_increment,
+  `id_cit` int(4) NOT NULL,
+  `rut_ima` varchar(200) NOT NULL,
+  `des_cit` varchar(250) NOT NULL,
+  `ima_cit` longblob NOT NULL,
+  `tip_cit` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id_ima`),
+  KEY `FK_imagencita_cita` (`id_cit`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `imagencita`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `odontoactuales`
+-- 
+
+CREATE TABLE `odontoactuales` (
+  `id_odo` int(4) NOT NULL,
+  `id_pac` int(4) NOT NULL,
+  `d1_izq` varchar(50) NOT NULL default '0',
+  `d1_sup` varchar(50) NOT NULL default '0',
+  `d1_cen` varchar(50) NOT NULL default '0',
+  `d1_der` varchar(50) NOT NULL default '0',
+  `d1_inf` varchar(50) NOT NULL default '0',
+  `d2_izq` varchar(50) NOT NULL default '0',
+  `d2_sup` varchar(50) NOT NULL default '0',
+  `d2_cen` varchar(50) NOT NULL default '0',
+  `d2_der` varchar(50) NOT NULL default '0',
+  `d2_inf` varchar(50) NOT NULL default '0',
+  `d3_izq` varchar(50) NOT NULL default '0',
+  `d3_sup` varchar(50) NOT NULL default '0',
+  `d3_cen` varchar(50) NOT NULL default '0',
+  `d3_der` varchar(50) NOT NULL default '0',
+  `d3_inf` varchar(50) NOT NULL default '0',
+  `d4_izq` varchar(50) NOT NULL default '0',
+  `d4_sup` varchar(50) NOT NULL default '0',
+  `d4_cen` varchar(50) NOT NULL default '0',
+  `d4_der` varchar(50) NOT NULL default '0',
+  `d4_inf` varchar(50) NOT NULL default '0',
+  `d5_izq` varchar(50) NOT NULL default '0',
+  `d5_sup` varchar(50) NOT NULL default '0',
+  `d5_cen` varchar(50) NOT NULL default '0',
+  `d5_der` varchar(50) NOT NULL default '0',
+  `d5_inf` varchar(50) NOT NULL default '0',
+  `d6_izq` varchar(50) NOT NULL default '0',
+  `d6_sup` varchar(50) NOT NULL default '0',
+  `d6_cen` varchar(50) NOT NULL default '0',
+  `d6_der` varchar(50) NOT NULL default '0',
+  `d6_inf` varchar(50) NOT NULL default '0',
+  `d7_izq` varchar(50) NOT NULL default '0',
+  `d7_sup` varchar(50) NOT NULL default '0',
+  `d7_cen` varchar(50) NOT NULL default '0',
+  `d7_der` varchar(50) NOT NULL default '0',
+  `d7_inf` varchar(50) NOT NULL default '0',
+  `d8_izq` varchar(50) NOT NULL default '0',
+  `d8_sup` varchar(50) NOT NULL default '0',
+  `d8_cen` varchar(50) NOT NULL default '0',
+  `d8_der` varchar(50) NOT NULL default '0',
+  `d8_inf` varchar(50) NOT NULL default '0',
+  `d9_izq` varchar(50) NOT NULL default '0',
+  `d9_sup` varchar(50) NOT NULL default '0',
+  `d9_cen` varchar(50) NOT NULL default '0',
+  `d9_der` varchar(50) NOT NULL default '0',
+  `d9_inf` varchar(50) NOT NULL default '0',
+  `d10_izq` varchar(50) NOT NULL default '0',
+  `d10_sup` varchar(50) NOT NULL default '0',
+  `d10_cen` varchar(50) NOT NULL default '0',
+  `d10_der` varchar(50) NOT NULL default '0',
+  `d10_inf` varchar(50) NOT NULL default '0',
+  `d11_izq` varchar(50) NOT NULL default '0',
+  `d11_sup` varchar(50) NOT NULL default '0',
+  `d11_cen` varchar(50) NOT NULL default '0',
+  `d11_der` varchar(50) NOT NULL default '0',
+  `d11_inf` varchar(50) NOT NULL default '0',
+  `d12_izq` varchar(50) NOT NULL default '0',
+  `d12_sup` varchar(50) NOT NULL default '0',
+  `d12_cen` varchar(50) NOT NULL default '0',
+  `d12_der` varchar(50) NOT NULL default '0',
+  `d12_inf` varchar(50) NOT NULL default '0',
+  `d13_izq` varchar(50) NOT NULL default '0',
+  `d13_sup` varchar(50) NOT NULL default '0',
+  `d13_cen` varchar(50) NOT NULL default '0',
+  `d13_der` varchar(50) NOT NULL default '0',
+  `d13_inf` varchar(50) NOT NULL default '0',
+  `d14_izq` varchar(50) NOT NULL default '0',
+  `d14_sup` varchar(50) NOT NULL default '0',
+  `d14_cen` varchar(50) NOT NULL default '0',
+  `d14_der` varchar(50) NOT NULL default '0',
+  `d14_inf` varchar(50) NOT NULL default '0',
+  `d15_izq` varchar(50) NOT NULL default '0',
+  `d15_sup` varchar(50) NOT NULL default '0',
+  `d15_cen` varchar(50) NOT NULL default '0',
+  `d15_der` varchar(50) NOT NULL default '0',
+  `d15_inf` varchar(50) NOT NULL default '0',
+  `d16_izq` varchar(50) NOT NULL default '0',
+  `d16_sup` varchar(50) NOT NULL default '0',
+  `d16_cen` varchar(50) NOT NULL default '0',
+  `d16_der` varchar(50) NOT NULL default '0',
+  `d16_inf` varchar(50) NOT NULL default '0',
+  PRIMARY KEY  (`id_odo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 
+-- Volcar la base de datos para la tabla `odontoactuales`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `odontogramas`
+-- 
+
+CREATE TABLE `odontogramas` (
+  `id_odo` int(4) NOT NULL,
+  `id_pac` int(4) NOT NULL,
+  `d1_izq` varchar(50) NOT NULL default '0',
+  `d1_sup` varchar(50) NOT NULL default '0',
+  `d1_cen` varchar(50) NOT NULL default '0',
+  `d1_der` varchar(50) NOT NULL default '0',
+  `d1_inf` varchar(50) NOT NULL default '0',
+  `d2_izq` varchar(50) NOT NULL default '0',
+  `d2_sup` varchar(50) NOT NULL default '0',
+  `d2_cen` varchar(50) NOT NULL default '0',
+  `d2_der` varchar(50) NOT NULL default '0',
+  `d2_inf` varchar(50) NOT NULL default '0',
+  `d3_izq` varchar(50) NOT NULL default '0',
+  `d3_sup` varchar(50) NOT NULL default '0',
+  `d3_cen` varchar(50) NOT NULL default '0',
+  `d3_der` varchar(50) NOT NULL default '0',
+  `d3_inf` varchar(50) NOT NULL default '0',
+  `d4_izq` varchar(50) NOT NULL default '0',
+  `d4_sup` varchar(50) NOT NULL default '0',
+  `d4_cen` varchar(50) NOT NULL default '0',
+  `d4_der` varchar(50) NOT NULL default '0',
+  `d4_inf` varchar(50) NOT NULL default '0',
+  `d5_izq` varchar(50) NOT NULL default '0',
+  `d5_sup` varchar(50) NOT NULL default '0',
+  `d5_cen` varchar(50) NOT NULL default '0',
+  `d5_der` varchar(50) NOT NULL default '0',
+  `d5_inf` varchar(50) NOT NULL default '0',
+  `d6_izq` varchar(50) NOT NULL default '0',
+  `d6_sup` varchar(50) NOT NULL default '0',
+  `d6_cen` varchar(50) NOT NULL default '0',
+  `d6_der` varchar(50) NOT NULL default '0',
+  `d6_inf` varchar(50) NOT NULL default '0',
+  `d7_izq` varchar(50) NOT NULL default '0',
+  `d7_sup` varchar(50) NOT NULL default '0',
+  `d7_cen` varchar(50) NOT NULL default '0',
+  `d7_der` varchar(50) NOT NULL default '0',
+  `d7_inf` varchar(50) NOT NULL default '0',
+  `d8_izq` varchar(50) NOT NULL default '0',
+  `d8_sup` varchar(50) NOT NULL default '0',
+  `d8_cen` varchar(50) NOT NULL default '0',
+  `d8_der` varchar(50) NOT NULL default '0',
+  `d8_inf` varchar(50) NOT NULL default '0',
+  `d9_izq` varchar(50) NOT NULL default '0',
+  `d9_sup` varchar(50) NOT NULL default '0',
+  `d9_cen` varchar(50) NOT NULL default '0',
+  `d9_der` varchar(50) NOT NULL default '0',
+  `d9_inf` varchar(50) NOT NULL default '0',
+  `d10_izq` varchar(50) NOT NULL default '0',
+  `d10_sup` varchar(50) NOT NULL default '0',
+  `d10_cen` varchar(50) NOT NULL default '0',
+  `d10_der` varchar(50) NOT NULL default '0',
+  `d10_inf` varchar(50) NOT NULL default '0',
+  `d11_izq` varchar(50) NOT NULL default '0',
+  `d11_sup` varchar(50) NOT NULL default '0',
+  `d11_cen` varchar(50) NOT NULL default '0',
+  `d11_der` varchar(50) NOT NULL default '0',
+  `d11_inf` varchar(50) NOT NULL default '0',
+  `d12_izq` varchar(50) NOT NULL default '0',
+  `d12_sup` varchar(50) NOT NULL default '0',
+  `d12_cen` varchar(50) NOT NULL default '0',
+  `d12_der` varchar(50) NOT NULL default '0',
+  `d12_inf` varchar(50) NOT NULL default '0',
+  `d13_izq` varchar(50) NOT NULL default '0',
+  `d13_sup` varchar(50) NOT NULL default '0',
+  `d13_cen` varchar(50) NOT NULL default '0',
+  `d13_der` varchar(50) NOT NULL default '0',
+  `d13_inf` varchar(50) NOT NULL default '0',
+  `d14_izq` varchar(50) NOT NULL default '0',
+  `d14_sup` varchar(50) NOT NULL default '0',
+  `d14_cen` varchar(50) NOT NULL default '0',
+  `d14_der` varchar(50) NOT NULL default '0',
+  `d14_inf` varchar(50) NOT NULL default '0',
+  `d15_izq` varchar(50) NOT NULL default '0',
+  `d15_sup` varchar(50) NOT NULL default '0',
+  `d15_cen` varchar(50) NOT NULL default '0',
+  `d15_der` varchar(50) NOT NULL default '0',
+  `d15_inf` varchar(50) NOT NULL default '0',
+  `d16_izq` varchar(50) NOT NULL default '0',
+  `d16_sup` varchar(50) NOT NULL default '0',
+  `d16_cen` varchar(50) NOT NULL default '0',
+  `d16_der` varchar(50) NOT NULL default '0',
+  `d16_inf` varchar(50) NOT NULL default '0',
+  PRIMARY KEY  (`id_odo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 
+-- Volcar la base de datos para la tabla `odontogramas`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `odontomaxinf`
+-- 
+
+CREATE TABLE `odontomaxinf` (
+  `id_odo` int(4) NOT NULL,
+  `id_pac` int(4) NOT NULL,
+  `d1_izq` varchar(50) NOT NULL default '0',
+  `d1_sup` varchar(50) NOT NULL default '0',
+  `d1_cen` varchar(50) NOT NULL default '0',
+  `d1_der` varchar(50) NOT NULL default '0',
+  `d1_inf` varchar(50) NOT NULL default '0',
+  `d2_izq` varchar(50) NOT NULL default '0',
+  `d2_sup` varchar(50) NOT NULL default '0',
+  `d2_cen` varchar(50) NOT NULL default '0',
+  `d2_der` varchar(50) NOT NULL default '0',
+  `d2_inf` varchar(50) NOT NULL default '0',
+  `d3_izq` varchar(50) NOT NULL default '0',
+  `d3_sup` varchar(50) NOT NULL default '0',
+  `d3_cen` varchar(50) NOT NULL default '0',
+  `d3_der` varchar(50) NOT NULL default '0',
+  `d3_inf` varchar(50) NOT NULL default '0',
+  `d4_izq` varchar(50) NOT NULL default '0',
+  `d4_sup` varchar(50) NOT NULL default '0',
+  `d4_cen` varchar(50) NOT NULL default '0',
+  `d4_der` varchar(50) NOT NULL default '0',
+  `d4_inf` varchar(50) NOT NULL default '0',
+  `d5_izq` varchar(50) NOT NULL default '0',
+  `d5_sup` varchar(50) NOT NULL default '0',
+  `d5_cen` varchar(50) NOT NULL default '0',
+  `d5_der` varchar(50) NOT NULL default '0',
+  `d5_inf` varchar(50) NOT NULL default '0',
+  `d6_izq` varchar(50) NOT NULL default '0',
+  `d6_sup` varchar(50) NOT NULL default '0',
+  `d6_cen` varchar(50) NOT NULL default '0',
+  `d6_der` varchar(50) NOT NULL default '0',
+  `d6_inf` varchar(50) NOT NULL default '0',
+  `d7_izq` varchar(50) NOT NULL default '0',
+  `d7_sup` varchar(50) NOT NULL default '0',
+  `d7_cen` varchar(50) NOT NULL default '0',
+  `d7_der` varchar(50) NOT NULL default '0',
+  `d7_inf` varchar(50) NOT NULL default '0',
+  `d8_izq` varchar(50) NOT NULL default '0',
+  `d8_sup` varchar(50) NOT NULL default '0',
+  `d8_cen` varchar(50) NOT NULL default '0',
+  `d8_der` varchar(50) NOT NULL default '0',
+  `d8_inf` varchar(50) NOT NULL default '0',
+  `d9_izq` varchar(50) NOT NULL default '0',
+  `d9_sup` varchar(50) NOT NULL default '0',
+  `d9_cen` varchar(50) NOT NULL default '0',
+  `d9_der` varchar(50) NOT NULL default '0',
+  `d9_inf` varchar(50) NOT NULL default '0',
+  `d10_izq` varchar(50) NOT NULL default '0',
+  `d10_sup` varchar(50) NOT NULL default '0',
+  `d10_cen` varchar(50) NOT NULL default '0',
+  `d10_der` varchar(50) NOT NULL default '0',
+  `d10_inf` varchar(50) NOT NULL default '0',
+  `d11_izq` varchar(50) NOT NULL default '0',
+  `d11_sup` varchar(50) NOT NULL default '0',
+  `d11_cen` varchar(50) NOT NULL default '0',
+  `d11_der` varchar(50) NOT NULL default '0',
+  `d11_inf` varchar(50) NOT NULL default '0',
+  `d12_izq` varchar(50) NOT NULL default '0',
+  `d12_sup` varchar(50) NOT NULL default '0',
+  `d12_cen` varchar(50) NOT NULL default '0',
+  `d12_der` varchar(50) NOT NULL default '0',
+  `d12_inf` varchar(50) NOT NULL default '0',
+  `d13_izq` varchar(50) NOT NULL default '0',
+  `d13_sup` varchar(50) NOT NULL default '0',
+  `d13_cen` varchar(50) NOT NULL default '0',
+  `d13_der` varchar(50) NOT NULL default '0',
+  `d13_inf` varchar(50) NOT NULL default '0',
+  `d14_izq` varchar(50) NOT NULL default '0',
+  `d14_sup` varchar(50) NOT NULL default '0',
+  `d14_cen` varchar(50) NOT NULL default '0',
+  `d14_der` varchar(50) NOT NULL default '0',
+  `d14_inf` varchar(50) NOT NULL default '0',
+  `d15_izq` varchar(50) NOT NULL default '0',
+  `d15_sup` varchar(50) NOT NULL default '0',
+  `d15_cen` varchar(50) NOT NULL default '0',
+  `d15_der` varchar(50) NOT NULL default '0',
+  `d15_inf` varchar(50) NOT NULL default '0',
+  `d16_izq` varchar(50) NOT NULL default '0',
+  `d16_sup` varchar(50) NOT NULL default '0',
+  `d16_cen` varchar(50) NOT NULL default '0',
+  `d16_der` varchar(50) NOT NULL default '0',
+  `d16_inf` varchar(50) NOT NULL default '0',
+  PRIMARY KEY  (`id_odo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 
+-- Volcar la base de datos para la tabla `odontomaxinf`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `odontomaxinfactuales`
+-- 
+
+CREATE TABLE `odontomaxinfactuales` (
+  `id_odo` int(4) NOT NULL,
+  `id_pac` int(4) NOT NULL,
+  `d1_izq` varchar(50) NOT NULL default '0',
+  `d1_sup` varchar(50) NOT NULL default '0',
+  `d1_cen` varchar(50) NOT NULL default '0',
+  `d1_der` varchar(50) NOT NULL default '0',
+  `d1_inf` varchar(50) NOT NULL default '0',
+  `d2_izq` varchar(50) NOT NULL default '0',
+  `d2_sup` varchar(50) NOT NULL default '0',
+  `d2_cen` varchar(50) NOT NULL default '0',
+  `d2_der` varchar(50) NOT NULL default '0',
+  `d2_inf` varchar(50) NOT NULL default '0',
+  `d3_izq` varchar(50) NOT NULL default '0',
+  `d3_sup` varchar(50) NOT NULL default '0',
+  `d3_cen` varchar(50) NOT NULL default '0',
+  `d3_der` varchar(50) NOT NULL default '0',
+  `d3_inf` varchar(50) NOT NULL default '0',
+  `d4_izq` varchar(50) NOT NULL default '0',
+  `d4_sup` varchar(50) NOT NULL default '0',
+  `d4_cen` varchar(50) NOT NULL default '0',
+  `d4_der` varchar(50) NOT NULL default '0',
+  `d4_inf` varchar(50) NOT NULL default '0',
+  `d5_izq` varchar(50) NOT NULL default '0',
+  `d5_sup` varchar(50) NOT NULL default '0',
+  `d5_cen` varchar(50) NOT NULL default '0',
+  `d5_der` varchar(50) NOT NULL default '0',
+  `d5_inf` varchar(50) NOT NULL default '0',
+  `d6_izq` varchar(50) NOT NULL default '0',
+  `d6_sup` varchar(50) NOT NULL default '0',
+  `d6_cen` varchar(50) NOT NULL default '0',
+  `d6_der` varchar(50) NOT NULL default '0',
+  `d6_inf` varchar(50) NOT NULL default '0',
+  `d7_izq` varchar(50) NOT NULL default '0',
+  `d7_sup` varchar(50) NOT NULL default '0',
+  `d7_cen` varchar(50) NOT NULL default '0',
+  `d7_der` varchar(50) NOT NULL default '0',
+  `d7_inf` varchar(50) NOT NULL default '0',
+  `d8_izq` varchar(50) NOT NULL default '0',
+  `d8_sup` varchar(50) NOT NULL default '0',
+  `d8_cen` varchar(50) NOT NULL default '0',
+  `d8_der` varchar(50) NOT NULL default '0',
+  `d8_inf` varchar(50) NOT NULL default '0',
+  `d9_izq` varchar(50) NOT NULL default '0',
+  `d9_sup` varchar(50) NOT NULL default '0',
+  `d9_cen` varchar(50) NOT NULL default '0',
+  `d9_der` varchar(50) NOT NULL default '0',
+  `d9_inf` varchar(50) NOT NULL default '0',
+  `d10_izq` varchar(50) NOT NULL default '0',
+  `d10_sup` varchar(50) NOT NULL default '0',
+  `d10_cen` varchar(50) NOT NULL default '0',
+  `d10_der` varchar(50) NOT NULL default '0',
+  `d10_inf` varchar(50) NOT NULL default '0',
+  `d11_izq` varchar(50) NOT NULL default '0',
+  `d11_sup` varchar(50) NOT NULL default '0',
+  `d11_cen` varchar(50) NOT NULL default '0',
+  `d11_der` varchar(50) NOT NULL default '0',
+  `d11_inf` varchar(50) NOT NULL default '0',
+  `d12_izq` varchar(50) NOT NULL default '0',
+  `d12_sup` varchar(50) NOT NULL default '0',
+  `d12_cen` varchar(50) NOT NULL default '0',
+  `d12_der` varchar(50) NOT NULL default '0',
+  `d12_inf` varchar(50) NOT NULL default '0',
+  `d13_izq` varchar(50) NOT NULL default '0',
+  `d13_sup` varchar(50) NOT NULL default '0',
+  `d13_cen` varchar(50) NOT NULL default '0',
+  `d13_der` varchar(50) NOT NULL default '0',
+  `d13_inf` varchar(50) NOT NULL default '0',
+  `d14_izq` varchar(50) NOT NULL default '0',
+  `d14_sup` varchar(50) NOT NULL default '0',
+  `d14_cen` varchar(50) NOT NULL default '0',
+  `d14_der` varchar(50) NOT NULL default '0',
+  `d14_inf` varchar(50) NOT NULL default '0',
+  `d15_izq` varchar(50) NOT NULL default '0',
+  `d15_sup` varchar(50) NOT NULL default '0',
+  `d15_cen` varchar(50) NOT NULL default '0',
+  `d15_der` varchar(50) NOT NULL default '0',
+  `d15_inf` varchar(50) NOT NULL default '0',
+  `d16_izq` varchar(50) NOT NULL default '0',
+  `d16_sup` varchar(50) NOT NULL default '0',
+  `d16_cen` varchar(50) NOT NULL default '0',
+  `d16_der` varchar(50) NOT NULL default '0',
+  `d16_inf` varchar(50) NOT NULL default '0',
+  PRIMARY KEY  (`id_odo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 
+-- Volcar la base de datos para la tabla `odontomaxinfactuales`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `pacientes`
+-- 
+
+CREATE TABLE `pacientes` (
+  `id_pac` int(4) NOT NULL auto_increment,
+  `id_per` int(4) NOT NULL,
+  PRIMARY KEY  (`id_pac`),
+  KEY `FK_pacientes_personas` (`id_per`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+-- 
+-- Volcar la base de datos para la tabla `pacientes`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `personas`
+-- 
+
+CREATE TABLE `personas` (
+  `id_per` int(4) NOT NULL auto_increment,
+  `ced_per` varchar(15) NOT NULL,
+  `nom_per` varchar(50) NOT NULL,
+  `ape_per` varchar(50) NOT NULL,
+  `fec_nac` varchar(50) character set latin1 collate latin1_bin NOT NULL,
+  `edad_per` int(4) NOT NULL,
+  `tel_per` varchar(20) NOT NULL,
+  `dir_per` varchar(200) NOT NULL,
+  `sex_per` int(4) NOT NULL,
+  `est_civ` int(4) NOT NULL,
+  `mail_per` varchar(50) default NULL,
+  `rep_per` varchar(50) default NULL,
+  `fec_ing` varchar(50) NOT NULL,
+  `rut_ima` varchar(200) default NULL,
+  `imagen` longblob,
+  PRIMARY KEY  (`id_per`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+-- 
+-- Volcar la base de datos para la tabla `personas`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `productos`
+-- 
+
+CREATE TABLE `productos` (
+  `id_prod` int(4) NOT NULL auto_increment,
+  `cod_prod` varchar(50) NOT NULL,
+  `nom_prod` varchar(100) NOT NULL,
+  `pre_pro_prod` decimal(13,2) NOT NULL,
+  `pre_cli_prod` decimal(13,2) default NULL,
+  `stok_prod` int(4) NOT NULL,
+  PRIMARY KEY  (`id_prod`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `productos`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `tratamientos`
+-- 
+
+CREATE TABLE `tratamientos` (
+  `id_tra` int(4) NOT NULL auto_increment,
+  `nom_tra` varchar(100) NOT NULL,
+  `pre` decimal(13,2) NOT NULL,
+  PRIMARY KEY  (`id_tra`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `tratamientos`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `usuarios`
+-- 
+
+CREATE TABLE `usuarios` (
+  `id_usu` int(4) NOT NULL auto_increment,
+  `nom_usu` varchar(50) default NULL,
+  `psw_usu` varchar(50) NOT NULL,
+  `id_per` int(4) NOT NULL,
+  `pri_usu` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id_usu`),
+  KEY `FK_usuarios_personas` (`id_per`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `usuarios`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura Stand-in para la vista `vistacita`
+-- 
+CREATE TABLE `vistacita` (
+`id_cit` int(4)
+,`id_pac` int(4)
+,`id_per` int(4)
+,`ced_per` varchar(15)
+,`nom_per` varchar(50)
+,`ape_per` varchar(50)
+,`fec_cit` varchar(50)
+,`mot_cit` varchar(300)
+,`cau_cit` varchar(300)
+,`id_det` int(4)
+,`tra_det` varchar(50)
+,`pie_det` varchar(50)
+,`car_det` varchar(50)
+,`obs_det` varchar(300)
+);
+-- --------------------------------------------------------
+
+-- 
+-- Estructura Stand-in para la vista `vistacitas`
+-- 
+CREATE TABLE `vistacitas` (
+`id_cit` int(4)
+,`fec_cit` varchar(50)
+,`mot_cit` varchar(300)
+,`cau_cit` varchar(300)
+,`id_pac` int(4)
+,`id_per` int(4)
+,`ced_per` varchar(15)
+,`nom_per` varchar(50)
+,`ape_per` varchar(50)
+,`fec_nac` varchar(50)
+);
+-- --------------------------------------------------------
+
+-- 
+-- Estructura Stand-in para la vista `vistadetdiagnostico`
+-- 
+CREATE TABLE `vistadetdiagnostico` (
+`id_dia` int(4)
+,`id_pac` int(4)
+,`id_per` int(4)
+,`ced_per` varchar(15)
+,`nom_per` varchar(50)
+,`ape_per` varchar(50)
+,`edad_per` int(4)
+,`sup_num` varchar(4)
+,`abr_exad` varchar(4)
+,`man_exad` varchar(4)
+,`pat_pul` varchar(4)
+,`pla_bla` varchar(4)
+,`pla_cal` varchar(4)
+,`flu_den` varchar(10)
+,`otr_exad` varchar(300)
+,`obs_exad` varchar(300)
+,`cau_ext` varchar(50)
+,`fin_con` varchar(50)
+,`dia` varchar(300)
+,`pro` varchar(300)
+,`ope_tra` varchar(4)
+,`end_tra` varchar(4)
+,`per_tra` varchar(4)
+,`pro_tra` varchar(4)
+,`cir_tra` varchar(4)
+,`ort_tra` varchar(4)
+,`exo_tra` varchar(4)
+,`med_ora` varchar(4)
+,`otra_tra` varchar(250)
+,`pul_tra` varchar(4)
+,`pulpe_tra` varchar(4)
+,`exosim_tra` varchar(4)
+,`id_dx` int(4)
+,`dx` varchar(50)
+);
+-- --------------------------------------------------------
+
+-- 
+-- Estructura Stand-in para la vista `vistahc`
+-- 
+CREATE TABLE `vistahc` (
+`id_pac` int(4)
+,`id_per` int(4)
+,`ced_per` varchar(15)
+,`nom_per` varchar(50)
+,`ape_per` varchar(50)
+,`fec_nac` varchar(50)
+,`edad_per` int(4)
+,`tel_per` varchar(20)
+,`dir_per` varchar(200)
+,`sex_per` int(4)
+,`est_civ` int(4)
+,`mail_per` varchar(50)
+,`rep_per` varchar(50)
+,`fec_ing` varchar(50)
+,`id_ana` int(4)
+,`tra_med` varchar(50)
+,`obs_tra` varchar(200)
+,`ing_med` varchar(50)
+,`obs_ing` varchar(200)
+,`rea_ale` varchar(50)
+,`obs_rea` varchar(200)
+,`hemo` varchar(50)
+,`obs_hem` varchar(200)
+,`irrad` varchar(50)
+,`obs_irr` varchar(200)
+,`sinu` varchar(50)
+,`obs_sin` varchar(200)
+,`enf_res` varchar(50)
+,`obs_enf` varchar(200)
+,`card` varchar(50)
+,`obs_car` varchar(200)
+,`diab` varchar(50)
+,`obs_dia` varchar(200)
+,`fie_reu` varchar(50)
+,`obs_fie` varchar(200)
+,`hepa` varchar(50)
+,`obs_hep` varchar(200)
+,`hiper` varchar(50)
+,`obs_hip` varchar(200)
+,`otras` varchar(250)
+,`cepillado` varchar(50)
+,`obs_cep` varchar(200)
+,`seda` varchar(50)
+,`obs_sed` varchar(200)
+,`id_exa` int(4)
+,`tem_exa` varchar(50)
+,`pul_exa` varchar(50)
+,`ten_exa` varchar(50)
+,`res_exa` varchar(50)
+,`art_exa` varchar(50)
+,`lab_exa` varchar(50)
+,`len_exa` varchar(50)
+,`pal_exa` varchar(50)
+,`pis_exa` varchar(50)
+,`car_exa` varchar(50)
+,`gla_exa` varchar(50)
+,`max_exa` varchar(50)
+,`sen_exa` varchar(50)
+,`mus_exa` varchar(50)
+,`sis_ner` varchar(50)
+,`sis_vas` varchar(50)
+,`lin_exa` varchar(50)
+,`fun_exa` varchar(50)
+,`obs_exa` varchar(250)
+,`id_dia` int(4)
+,`sup_num` varchar(4)
+,`abr_exad` varchar(4)
+,`man_exad` varchar(4)
+,`pat_pul` varchar(4)
+,`pla_bla` varchar(4)
+,`pla_cal` varchar(4)
+,`flu_den` varchar(10)
+,`otr_exad` varchar(300)
+,`obs_exad` varchar(300)
+,`cau_ext` varchar(50)
+,`fin_con` varchar(50)
+,`dia` varchar(300)
+,`pro` varchar(300)
+,`ope_tra` varchar(4)
+,`end_tra` varchar(4)
+,`per_tra` varchar(4)
+,`pro_tra` varchar(4)
+,`cir_tra` varchar(4)
+,`ort_tra` varchar(4)
+,`exo_tra` varchar(4)
+,`med_ora` varchar(4)
+,`otra_tra` varchar(250)
+,`pul_tra` varchar(4)
+,`pulpe_tra` varchar(4)
+,`exosim_tra` varchar(4)
+,`id_det_dia` int(4)
+,`id_dx` int(4)
+,`dx` varchar(50)
+);
+-- --------------------------------------------------------
+
+-- 
+-- Estructura Stand-in para la vista `vistahistoriaclin`
+-- 
+CREATE TABLE `vistahistoriaclin` (
+`id_pac` int(4)
+,`id_per` int(4)
+,`ced_per` varchar(15)
+,`nom_per` varchar(50)
+,`ape_per` varchar(50)
+,`fec_nac` varchar(50)
+,`edad_per` int(4)
+,`tel_per` varchar(20)
+,`dir_per` varchar(200)
+,`sex_per` int(4)
+,`est_civ` int(4)
+,`mail_per` varchar(50)
+,`rep_per` varchar(50)
+,`fec_ing` varchar(50)
+,`tra_med` varchar(50)
+,`obs_tra` varchar(200)
+,`ing_med` varchar(50)
+,`obs_ing` varchar(200)
+,`rea_ale` varchar(50)
+,`obs_rea` varchar(200)
+,`hemo` varchar(50)
+,`obs_hem` varchar(200)
+,`irrad` varchar(50)
+,`obs_irr` varchar(200)
+,`sinu` varchar(50)
+,`obs_sin` varchar(200)
+,`enf_res` varchar(50)
+,`obs_enf` varchar(200)
+,`card` varchar(50)
+,`obs_car` varchar(200)
+,`diab` varchar(50)
+,`obs_dia` varchar(200)
+,`fie_reu` varchar(50)
+,`obs_fie` varchar(200)
+,`hepa` varchar(50)
+,`obs_hep` varchar(200)
+,`hiper` varchar(50)
+,`obs_hip` varchar(200)
+,`otras` varchar(250)
+,`cepillado` varchar(50)
+,`obs_cep` varchar(200)
+,`seda` varchar(50)
+,`obs_sed` varchar(200)
+,`tem_exa` varchar(50)
+,`pul_exa` varchar(50)
+,`ten_exa` varchar(50)
+,`res_exa` varchar(50)
+,`art_exa` varchar(50)
+,`lab_exa` varchar(50)
+,`len_exa` varchar(50)
+,`pal_exa` varchar(50)
+,`pis_exa` varchar(50)
+,`car_exa` varchar(50)
+,`gla_exa` varchar(50)
+,`max_exa` varchar(50)
+,`sen_exa` varchar(50)
+,`mus_exa` varchar(50)
+,`sis_ner` varchar(50)
+,`sis_vas` varchar(50)
+,`obs_exa` varchar(250)
+);
+-- --------------------------------------------------------
+
+-- 
+-- Estructura Stand-in para la vista `vistahistoriaclinica`
+-- 
+CREATE TABLE `vistahistoriaclinica` (
+`id_pac` int(4)
+,`id_per` int(4)
+,`ced_per` varchar(15)
+,`nom_per` varchar(50)
+,`ape_per` varchar(50)
+,`fec_nac` varchar(50)
+,`edad_per` int(4)
+,`tel_per` varchar(20)
+,`dir_per` varchar(200)
+,`sex_per` int(4)
+,`est_civ` int(4)
+,`mail_per` varchar(50)
+,`rep_per` varchar(50)
+,`fec_ing` varchar(50)
+,`tra_med` varchar(50)
+,`obs_tra` varchar(200)
+,`ing_med` varchar(50)
+,`obs_ing` varchar(200)
+,`rea_ale` varchar(50)
+,`obs_rea` varchar(200)
+,`hemo` varchar(50)
+,`obs_hem` varchar(200)
+,`irrad` varchar(50)
+,`obs_irr` varchar(200)
+,`sinu` varchar(50)
+,`obs_sin` varchar(200)
+,`enf_res` varchar(50)
+,`obs_enf` varchar(200)
+,`card` varchar(50)
+,`obs_car` varchar(200)
+,`diab` varchar(50)
+,`obs_dia` varchar(200)
+,`fie_reu` varchar(50)
+,`obs_fie` varchar(200)
+,`hepa` varchar(50)
+,`obs_hep` varchar(200)
+,`hiper` varchar(50)
+,`obs_hip` varchar(200)
+,`otras` varchar(250)
+,`cepillado` varchar(50)
+,`obs_cep` varchar(200)
+,`seda` varchar(50)
+,`obs_sed` varchar(200)
+,`tem_exa` varchar(50)
+,`pul_exa` varchar(50)
+,`ten_exa` varchar(50)
+,`res_exa` varchar(50)
+,`art_exa` varchar(50)
+,`lab_exa` varchar(50)
+,`len_exa` varchar(50)
+,`pal_exa` varchar(50)
+,`pis_exa` varchar(50)
+,`car_exa` varchar(50)
+,`gla_exa` varchar(50)
+,`max_exa` varchar(50)
+,`sen_exa` varchar(50)
+,`mus_exa` varchar(50)
+,`sis_ner` varchar(50)
+,`sis_vas` varchar(50)
+,`obs_exa` varchar(250)
+,`sup_num` varchar(4)
+,`abr_exad` varchar(4)
+,`man_exad` varchar(4)
+,`pat_pul` varchar(4)
+,`pla_bla` varchar(4)
+,`pla_cal` varchar(4)
+,`flu_den` varchar(10)
+,`otr_exad` varchar(300)
+,`obs_exad` varchar(300)
+,`cau_ext` varchar(50)
+,`fin_con` varchar(50)
+,`dia` varchar(300)
+,`pro` varchar(300)
+,`ope_tra` varchar(4)
+,`end_tra` varchar(4)
+,`per_tra` varchar(4)
+,`pro_tra` varchar(4)
+,`cir_tra` varchar(4)
+,`ort_tra` varchar(4)
+,`exo_tra` varchar(4)
+,`med_ora` varchar(4)
+,`otra_tra` varchar(250)
+);
+-- --------------------------------------------------------
+
+-- 
+-- Estructura Stand-in para la vista `vistapacientes`
+-- 
+CREATE TABLE `vistapacientes` (
+`id_pac` int(4)
+,`id_per` int(4)
+,`ced_per` varchar(15)
+,`nom_per` varchar(50)
+,`ape_per` varchar(50)
+,`fec_nac` varchar(50)
+,`edad_per` int(4)
+,`tel_per` varchar(20)
+,`dir_per` varchar(200)
+,`sex_per` int(4)
+,`est_civ` int(4)
+,`mail_per` varchar(50)
+,`rep_per` varchar(50)
+,`fec_ing` varchar(50)
+,`rut_ima` varchar(200)
+,`imagen` longblob
+);
+-- --------------------------------------------------------
+
+-- 
+-- Estructura para la vista `vistacita`
+-- 
+DROP TABLE IF EXISTS `vistacita`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `historiaclinica`.`vistacita` AS select `historiaclinica`.`citas`.`id_cit` AS `id_cit`,`historiaclinica`.`citas`.`id_pac` AS `id_pac`,`historiaclinica`.`pacientes`.`id_per` AS `id_per`,`historiaclinica`.`personas`.`ced_per` AS `ced_per`,`historiaclinica`.`personas`.`nom_per` AS `nom_per`,`historiaclinica`.`personas`.`ape_per` AS `ape_per`,`historiaclinica`.`citas`.`fec_cit` AS `fec_cit`,`historiaclinica`.`citas`.`mot_cit` AS `mot_cit`,`historiaclinica`.`citas`.`cau_cit` AS `cau_cit`,`historiaclinica`.`detallecitas`.`id_det` AS `id_det`,`historiaclinica`.`detallecitas`.`tra_det` AS `tra_det`,`historiaclinica`.`detallecitas`.`pie_det` AS `pie_det`,`historiaclinica`.`detallecitas`.`car_det` AS `car_det`,`historiaclinica`.`detallecitas`.`obs_det` AS `obs_det` from (((`historiaclinica`.`citas` join `historiaclinica`.`pacientes`) join `historiaclinica`.`personas`) join `historiaclinica`.`detallecitas`) where (`historiaclinica`.`pacientes`.`id_per` = `historiaclinica`.`personas`.`id_per`);
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura para la vista `vistacitas`
+-- 
+DROP TABLE IF EXISTS `vistacitas`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `historiaclinica`.`vistacitas` AS select `historiaclinica`.`citas`.`id_cit` AS `id_cit`,`historiaclinica`.`citas`.`fec_cit` AS `fec_cit`,`historiaclinica`.`citas`.`mot_cit` AS `mot_cit`,`historiaclinica`.`citas`.`cau_cit` AS `cau_cit`,`historiaclinica`.`citas`.`id_pac` AS `id_pac`,`historiaclinica`.`pacientes`.`id_per` AS `id_per`,`historiaclinica`.`personas`.`ced_per` AS `ced_per`,`historiaclinica`.`personas`.`nom_per` AS `nom_per`,`historiaclinica`.`personas`.`ape_per` AS `ape_per`,`historiaclinica`.`personas`.`fec_nac` AS `fec_nac` from ((`historiaclinica`.`citas` join `historiaclinica`.`pacientes`) join `historiaclinica`.`personas`) where (`historiaclinica`.`pacientes`.`id_per` = `historiaclinica`.`personas`.`id_per`);
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura para la vista `vistadetdiagnostico`
+-- 
+DROP TABLE IF EXISTS `vistadetdiagnostico`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `historiaclinica`.`vistadetdiagnostico` AS select `historiaclinica`.`diagnosticos`.`id_dia` AS `id_dia`,`historiaclinica`.`diagnosticos`.`id_pac` AS `id_pac`,`historiaclinica`.`pacientes`.`id_per` AS `id_per`,`historiaclinica`.`personas`.`ced_per` AS `ced_per`,`historiaclinica`.`personas`.`nom_per` AS `nom_per`,`historiaclinica`.`personas`.`ape_per` AS `ape_per`,`historiaclinica`.`personas`.`edad_per` AS `edad_per`,`historiaclinica`.`diagnosticos`.`sup_num` AS `sup_num`,`historiaclinica`.`diagnosticos`.`abr_exad` AS `abr_exad`,`historiaclinica`.`diagnosticos`.`man_exad` AS `man_exad`,`historiaclinica`.`diagnosticos`.`pat_pul` AS `pat_pul`,`historiaclinica`.`diagnosticos`.`pla_bla` AS `pla_bla`,`historiaclinica`.`diagnosticos`.`pla_cal` AS `pla_cal`,`historiaclinica`.`diagnosticos`.`flu_den` AS `flu_den`,`historiaclinica`.`diagnosticos`.`otr_exad` AS `otr_exad`,`historiaclinica`.`diagnosticos`.`obs_exad` AS `obs_exad`,`historiaclinica`.`diagnosticos`.`cau_ext` AS `cau_ext`,`historiaclinica`.`diagnosticos`.`fin_con` AS `fin_con`,`historiaclinica`.`diagnosticos`.`dia` AS `dia`,`historiaclinica`.`diagnosticos`.`pro` AS `pro`,`historiaclinica`.`diagnosticos`.`ope_tra` AS `ope_tra`,`historiaclinica`.`diagnosticos`.`end_tra` AS `end_tra`,`historiaclinica`.`diagnosticos`.`per_tra` AS `per_tra`,`historiaclinica`.`diagnosticos`.`pro_tra` AS `pro_tra`,`historiaclinica`.`diagnosticos`.`cir_tra` AS `cir_tra`,`historiaclinica`.`diagnosticos`.`ort_tra` AS `ort_tra`,`historiaclinica`.`diagnosticos`.`exo_tra` AS `exo_tra`,`historiaclinica`.`diagnosticos`.`med_ora` AS `med_ora`,`historiaclinica`.`diagnosticos`.`otra_tra` AS `otra_tra`,`historiaclinica`.`diagnosticos`.`pul_tra` AS `pul_tra`,`historiaclinica`.`diagnosticos`.`pulpe_tra` AS `pulpe_tra`,`historiaclinica`.`diagnosticos`.`exosim_tra` AS `exosim_tra`,`historiaclinica`.`detallediagnostico`.`id_dx` AS `id_dx`,`historiaclinica`.`dx`.`dx` AS `dx` from ((((`historiaclinica`.`diagnosticos` join `historiaclinica`.`pacientes`) join `historiaclinica`.`personas`) join `historiaclinica`.`detallediagnostico`) join `historiaclinica`.`dx`) where ((`historiaclinica`.`detallediagnostico`.`id_dia` = `historiaclinica`.`diagnosticos`.`id_dia`) and (`historiaclinica`.`diagnosticos`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`) and (`historiaclinica`.`pacientes`.`id_per` = `historiaclinica`.`personas`.`id_per`) and (`historiaclinica`.`detallediagnostico`.`id_dx` = `historiaclinica`.`dx`.`id_dx`));
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura para la vista `vistahc`
+-- 
+DROP TABLE IF EXISTS `vistahc`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `historiaclinica`.`vistahc` AS select `historiaclinica`.`pacientes`.`id_pac` AS `id_pac`,`historiaclinica`.`pacientes`.`id_per` AS `id_per`,`historiaclinica`.`personas`.`ced_per` AS `ced_per`,`historiaclinica`.`personas`.`nom_per` AS `nom_per`,`historiaclinica`.`personas`.`ape_per` AS `ape_per`,`historiaclinica`.`personas`.`fec_nac` AS `fec_nac`,`historiaclinica`.`personas`.`edad_per` AS `edad_per`,`historiaclinica`.`personas`.`tel_per` AS `tel_per`,`historiaclinica`.`personas`.`dir_per` AS `dir_per`,`historiaclinica`.`personas`.`sex_per` AS `sex_per`,`historiaclinica`.`personas`.`est_civ` AS `est_civ`,`historiaclinica`.`personas`.`mail_per` AS `mail_per`,`historiaclinica`.`personas`.`rep_per` AS `rep_per`,`historiaclinica`.`personas`.`fec_ing` AS `fec_ing`,`historiaclinica`.`anamnesis`.`id_ana` AS `id_ana`,`historiaclinica`.`anamnesis`.`tra_med` AS `tra_med`,`historiaclinica`.`anamnesis`.`obs_tra` AS `obs_tra`,`historiaclinica`.`anamnesis`.`ing_med` AS `ing_med`,`historiaclinica`.`anamnesis`.`obs_ing` AS `obs_ing`,`historiaclinica`.`anamnesis`.`rea_ale` AS `rea_ale`,`historiaclinica`.`anamnesis`.`obs_rea` AS `obs_rea`,`historiaclinica`.`anamnesis`.`hemo` AS `hemo`,`historiaclinica`.`anamnesis`.`obs_hem` AS `obs_hem`,`historiaclinica`.`anamnesis`.`irrad` AS `irrad`,`historiaclinica`.`anamnesis`.`obs_irr` AS `obs_irr`,`historiaclinica`.`anamnesis`.`sinu` AS `sinu`,`historiaclinica`.`anamnesis`.`obs_sin` AS `obs_sin`,`historiaclinica`.`anamnesis`.`enf_res` AS `enf_res`,`historiaclinica`.`anamnesis`.`obs_enf` AS `obs_enf`,`historiaclinica`.`anamnesis`.`card` AS `card`,`historiaclinica`.`anamnesis`.`obs_car` AS `obs_car`,`historiaclinica`.`anamnesis`.`diab` AS `diab`,`historiaclinica`.`anamnesis`.`obs_dia` AS `obs_dia`,`historiaclinica`.`anamnesis`.`fie_reu` AS `fie_reu`,`historiaclinica`.`anamnesis`.`obs_fie` AS `obs_fie`,`historiaclinica`.`anamnesis`.`hepa` AS `hepa`,`historiaclinica`.`anamnesis`.`obs_hep` AS `obs_hep`,`historiaclinica`.`anamnesis`.`hiper` AS `hiper`,`historiaclinica`.`anamnesis`.`obs_hip` AS `obs_hip`,`historiaclinica`.`anamnesis`.`otras` AS `otras`,`historiaclinica`.`anamnesis`.`cepillado` AS `cepillado`,`historiaclinica`.`anamnesis`.`obs_cep` AS `obs_cep`,`historiaclinica`.`anamnesis`.`seda` AS `seda`,`historiaclinica`.`anamnesis`.`obs_sed` AS `obs_sed`,`historiaclinica`.`exaestomatologicos`.`id_exa` AS `id_exa`,`historiaclinica`.`exaestomatologicos`.`tem_exa` AS `tem_exa`,`historiaclinica`.`exaestomatologicos`.`pul_exa` AS `pul_exa`,`historiaclinica`.`exaestomatologicos`.`ten_exa` AS `ten_exa`,`historiaclinica`.`exaestomatologicos`.`res_exa` AS `res_exa`,`historiaclinica`.`exaestomatologicos`.`art_exa` AS `art_exa`,`historiaclinica`.`exaestomatologicos`.`lab_exa` AS `lab_exa`,`historiaclinica`.`exaestomatologicos`.`len_exa` AS `len_exa`,`historiaclinica`.`exaestomatologicos`.`pal_exa` AS `pal_exa`,`historiaclinica`.`exaestomatologicos`.`pis_exa` AS `pis_exa`,`historiaclinica`.`exaestomatologicos`.`car_exa` AS `car_exa`,`historiaclinica`.`exaestomatologicos`.`gla_exa` AS `gla_exa`,`historiaclinica`.`exaestomatologicos`.`max_exa` AS `max_exa`,`historiaclinica`.`exaestomatologicos`.`sen_exa` AS `sen_exa`,`historiaclinica`.`exaestomatologicos`.`mus_exa` AS `mus_exa`,`historiaclinica`.`exaestomatologicos`.`sis_ner` AS `sis_ner`,`historiaclinica`.`exaestomatologicos`.`sis_vas` AS `sis_vas`,`historiaclinica`.`exaestomatologicos`.`lin_exa` AS `lin_exa`,`historiaclinica`.`exaestomatologicos`.`fun_exa` AS `fun_exa`,`historiaclinica`.`exaestomatologicos`.`obs_exa` AS `obs_exa`,`historiaclinica`.`diagnosticos`.`id_dia` AS `id_dia`,`historiaclinica`.`diagnosticos`.`sup_num` AS `sup_num`,`historiaclinica`.`diagnosticos`.`abr_exad` AS `abr_exad`,`historiaclinica`.`diagnosticos`.`man_exad` AS `man_exad`,`historiaclinica`.`diagnosticos`.`pat_pul` AS `pat_pul`,`historiaclinica`.`diagnosticos`.`pla_bla` AS `pla_bla`,`historiaclinica`.`diagnosticos`.`pla_cal` AS `pla_cal`,`historiaclinica`.`diagnosticos`.`flu_den` AS `flu_den`,`historiaclinica`.`diagnosticos`.`otr_exad` AS `otr_exad`,`historiaclinica`.`diagnosticos`.`obs_exad` AS `obs_exad`,`historiaclinica`.`diagnosticos`.`cau_ext` AS `cau_ext`,`historiaclinica`.`diagnosticos`.`fin_con` AS `fin_con`,`historiaclinica`.`diagnosticos`.`dia` AS `dia`,`historiaclinica`.`diagnosticos`.`pro` AS `pro`,`historiaclinica`.`diagnosticos`.`ope_tra` AS `ope_tra`,`historiaclinica`.`diagnosticos`.`end_tra` AS `end_tra`,`historiaclinica`.`diagnosticos`.`per_tra` AS `per_tra`,`historiaclinica`.`diagnosticos`.`pro_tra` AS `pro_tra`,`historiaclinica`.`diagnosticos`.`cir_tra` AS `cir_tra`,`historiaclinica`.`diagnosticos`.`ort_tra` AS `ort_tra`,`historiaclinica`.`diagnosticos`.`exo_tra` AS `exo_tra`,`historiaclinica`.`diagnosticos`.`med_ora` AS `med_ora`,`historiaclinica`.`diagnosticos`.`otra_tra` AS `otra_tra`,`historiaclinica`.`diagnosticos`.`pul_tra` AS `pul_tra`,`historiaclinica`.`diagnosticos`.`pulpe_tra` AS `pulpe_tra`,`historiaclinica`.`diagnosticos`.`exosim_tra` AS `exosim_tra`,`historiaclinica`.`detallediagnostico`.`id_det_dia` AS `id_det_dia`,`historiaclinica`.`detallediagnostico`.`id_dx` AS `id_dx`,`historiaclinica`.`dx`.`dx` AS `dx` from ((((((`historiaclinica`.`pacientes` join `historiaclinica`.`personas`) join `historiaclinica`.`anamnesis`) join `historiaclinica`.`exaestomatologicos`) join `historiaclinica`.`diagnosticos`) join `historiaclinica`.`detallediagnostico`) join `historiaclinica`.`dx`) where ((`historiaclinica`.`pacientes`.`id_per` = `historiaclinica`.`personas`.`id_per`) and (`historiaclinica`.`anamnesis`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`) and (`historiaclinica`.`exaestomatologicos`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`) and (`historiaclinica`.`diagnosticos`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`) and (`historiaclinica`.`detallediagnostico`.`id_dia` = `historiaclinica`.`diagnosticos`.`id_dia`) and (`historiaclinica`.`detallediagnostico`.`id_dx` = `historiaclinica`.`dx`.`id_dx`));
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura para la vista `vistahistoriaclin`
+-- 
+DROP TABLE IF EXISTS `vistahistoriaclin`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `historiaclinica`.`vistahistoriaclin` AS select `historiaclinica`.`pacientes`.`id_pac` AS `id_pac`,`historiaclinica`.`pacientes`.`id_per` AS `id_per`,`historiaclinica`.`personas`.`ced_per` AS `ced_per`,`historiaclinica`.`personas`.`nom_per` AS `nom_per`,`historiaclinica`.`personas`.`ape_per` AS `ape_per`,`historiaclinica`.`personas`.`fec_nac` AS `fec_nac`,`historiaclinica`.`personas`.`edad_per` AS `edad_per`,`historiaclinica`.`personas`.`tel_per` AS `tel_per`,`historiaclinica`.`personas`.`dir_per` AS `dir_per`,`historiaclinica`.`personas`.`sex_per` AS `sex_per`,`historiaclinica`.`personas`.`est_civ` AS `est_civ`,`historiaclinica`.`personas`.`mail_per` AS `mail_per`,`historiaclinica`.`personas`.`rep_per` AS `rep_per`,`historiaclinica`.`personas`.`fec_ing` AS `fec_ing`,`historiaclinica`.`anamnesis`.`tra_med` AS `tra_med`,`historiaclinica`.`anamnesis`.`obs_tra` AS `obs_tra`,`historiaclinica`.`anamnesis`.`ing_med` AS `ing_med`,`historiaclinica`.`anamnesis`.`obs_ing` AS `obs_ing`,`historiaclinica`.`anamnesis`.`rea_ale` AS `rea_ale`,`historiaclinica`.`anamnesis`.`obs_rea` AS `obs_rea`,`historiaclinica`.`anamnesis`.`hemo` AS `hemo`,`historiaclinica`.`anamnesis`.`obs_hem` AS `obs_hem`,`historiaclinica`.`anamnesis`.`irrad` AS `irrad`,`historiaclinica`.`anamnesis`.`obs_irr` AS `obs_irr`,`historiaclinica`.`anamnesis`.`sinu` AS `sinu`,`historiaclinica`.`anamnesis`.`obs_sin` AS `obs_sin`,`historiaclinica`.`anamnesis`.`enf_res` AS `enf_res`,`historiaclinica`.`anamnesis`.`obs_enf` AS `obs_enf`,`historiaclinica`.`anamnesis`.`card` AS `card`,`historiaclinica`.`anamnesis`.`obs_car` AS `obs_car`,`historiaclinica`.`anamnesis`.`diab` AS `diab`,`historiaclinica`.`anamnesis`.`obs_dia` AS `obs_dia`,`historiaclinica`.`anamnesis`.`fie_reu` AS `fie_reu`,`historiaclinica`.`anamnesis`.`obs_fie` AS `obs_fie`,`historiaclinica`.`anamnesis`.`hepa` AS `hepa`,`historiaclinica`.`anamnesis`.`obs_hep` AS `obs_hep`,`historiaclinica`.`anamnesis`.`hiper` AS `hiper`,`historiaclinica`.`anamnesis`.`obs_hip` AS `obs_hip`,`historiaclinica`.`anamnesis`.`otras` AS `otras`,`historiaclinica`.`anamnesis`.`cepillado` AS `cepillado`,`historiaclinica`.`anamnesis`.`obs_cep` AS `obs_cep`,`historiaclinica`.`anamnesis`.`seda` AS `seda`,`historiaclinica`.`anamnesis`.`obs_sed` AS `obs_sed`,`historiaclinica`.`exaestomatologicos`.`tem_exa` AS `tem_exa`,`historiaclinica`.`exaestomatologicos`.`pul_exa` AS `pul_exa`,`historiaclinica`.`exaestomatologicos`.`ten_exa` AS `ten_exa`,`historiaclinica`.`exaestomatologicos`.`res_exa` AS `res_exa`,`historiaclinica`.`exaestomatologicos`.`art_exa` AS `art_exa`,`historiaclinica`.`exaestomatologicos`.`lab_exa` AS `lab_exa`,`historiaclinica`.`exaestomatologicos`.`len_exa` AS `len_exa`,`historiaclinica`.`exaestomatologicos`.`pal_exa` AS `pal_exa`,`historiaclinica`.`exaestomatologicos`.`pis_exa` AS `pis_exa`,`historiaclinica`.`exaestomatologicos`.`car_exa` AS `car_exa`,`historiaclinica`.`exaestomatologicos`.`gla_exa` AS `gla_exa`,`historiaclinica`.`exaestomatologicos`.`max_exa` AS `max_exa`,`historiaclinica`.`exaestomatologicos`.`sen_exa` AS `sen_exa`,`historiaclinica`.`exaestomatologicos`.`mus_exa` AS `mus_exa`,`historiaclinica`.`exaestomatologicos`.`sis_ner` AS `sis_ner`,`historiaclinica`.`exaestomatologicos`.`sis_vas` AS `sis_vas`,`historiaclinica`.`exaestomatologicos`.`obs_exa` AS `obs_exa` from (((`historiaclinica`.`pacientes` join `historiaclinica`.`personas`) join `historiaclinica`.`anamnesis`) join `historiaclinica`.`exaestomatologicos`) where ((`historiaclinica`.`pacientes`.`id_per` = `historiaclinica`.`personas`.`id_per`) and (`historiaclinica`.`anamnesis`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`) and (`historiaclinica`.`exaestomatologicos`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`));
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura para la vista `vistahistoriaclinica`
+-- 
+DROP TABLE IF EXISTS `vistahistoriaclinica`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `historiaclinica`.`vistahistoriaclinica` AS select `historiaclinica`.`pacientes`.`id_pac` AS `id_pac`,`historiaclinica`.`pacientes`.`id_per` AS `id_per`,`historiaclinica`.`personas`.`ced_per` AS `ced_per`,`historiaclinica`.`personas`.`nom_per` AS `nom_per`,`historiaclinica`.`personas`.`ape_per` AS `ape_per`,`historiaclinica`.`personas`.`fec_nac` AS `fec_nac`,`historiaclinica`.`personas`.`edad_per` AS `edad_per`,`historiaclinica`.`personas`.`tel_per` AS `tel_per`,`historiaclinica`.`personas`.`dir_per` AS `dir_per`,`historiaclinica`.`personas`.`sex_per` AS `sex_per`,`historiaclinica`.`personas`.`est_civ` AS `est_civ`,`historiaclinica`.`personas`.`mail_per` AS `mail_per`,`historiaclinica`.`personas`.`rep_per` AS `rep_per`,`historiaclinica`.`personas`.`fec_ing` AS `fec_ing`,`historiaclinica`.`anamnesis`.`tra_med` AS `tra_med`,`historiaclinica`.`anamnesis`.`obs_tra` AS `obs_tra`,`historiaclinica`.`anamnesis`.`ing_med` AS `ing_med`,`historiaclinica`.`anamnesis`.`obs_ing` AS `obs_ing`,`historiaclinica`.`anamnesis`.`rea_ale` AS `rea_ale`,`historiaclinica`.`anamnesis`.`obs_rea` AS `obs_rea`,`historiaclinica`.`anamnesis`.`hemo` AS `hemo`,`historiaclinica`.`anamnesis`.`obs_hem` AS `obs_hem`,`historiaclinica`.`anamnesis`.`irrad` AS `irrad`,`historiaclinica`.`anamnesis`.`obs_irr` AS `obs_irr`,`historiaclinica`.`anamnesis`.`sinu` AS `sinu`,`historiaclinica`.`anamnesis`.`obs_sin` AS `obs_sin`,`historiaclinica`.`anamnesis`.`enf_res` AS `enf_res`,`historiaclinica`.`anamnesis`.`obs_enf` AS `obs_enf`,`historiaclinica`.`anamnesis`.`card` AS `card`,`historiaclinica`.`anamnesis`.`obs_car` AS `obs_car`,`historiaclinica`.`anamnesis`.`diab` AS `diab`,`historiaclinica`.`anamnesis`.`obs_dia` AS `obs_dia`,`historiaclinica`.`anamnesis`.`fie_reu` AS `fie_reu`,`historiaclinica`.`anamnesis`.`obs_fie` AS `obs_fie`,`historiaclinica`.`anamnesis`.`hepa` AS `hepa`,`historiaclinica`.`anamnesis`.`obs_hep` AS `obs_hep`,`historiaclinica`.`anamnesis`.`hiper` AS `hiper`,`historiaclinica`.`anamnesis`.`obs_hip` AS `obs_hip`,`historiaclinica`.`anamnesis`.`otras` AS `otras`,`historiaclinica`.`anamnesis`.`cepillado` AS `cepillado`,`historiaclinica`.`anamnesis`.`obs_cep` AS `obs_cep`,`historiaclinica`.`anamnesis`.`seda` AS `seda`,`historiaclinica`.`anamnesis`.`obs_sed` AS `obs_sed`,`historiaclinica`.`exaestomatologicos`.`tem_exa` AS `tem_exa`,`historiaclinica`.`exaestomatologicos`.`pul_exa` AS `pul_exa`,`historiaclinica`.`exaestomatologicos`.`ten_exa` AS `ten_exa`,`historiaclinica`.`exaestomatologicos`.`res_exa` AS `res_exa`,`historiaclinica`.`exaestomatologicos`.`art_exa` AS `art_exa`,`historiaclinica`.`exaestomatologicos`.`lab_exa` AS `lab_exa`,`historiaclinica`.`exaestomatologicos`.`len_exa` AS `len_exa`,`historiaclinica`.`exaestomatologicos`.`pal_exa` AS `pal_exa`,`historiaclinica`.`exaestomatologicos`.`pis_exa` AS `pis_exa`,`historiaclinica`.`exaestomatologicos`.`car_exa` AS `car_exa`,`historiaclinica`.`exaestomatologicos`.`gla_exa` AS `gla_exa`,`historiaclinica`.`exaestomatologicos`.`max_exa` AS `max_exa`,`historiaclinica`.`exaestomatologicos`.`sen_exa` AS `sen_exa`,`historiaclinica`.`exaestomatologicos`.`mus_exa` AS `mus_exa`,`historiaclinica`.`exaestomatologicos`.`sis_ner` AS `sis_ner`,`historiaclinica`.`exaestomatologicos`.`sis_vas` AS `sis_vas`,`historiaclinica`.`exaestomatologicos`.`obs_exa` AS `obs_exa`,`historiaclinica`.`diagnosticos`.`sup_num` AS `sup_num`,`historiaclinica`.`diagnosticos`.`abr_exad` AS `abr_exad`,`historiaclinica`.`diagnosticos`.`man_exad` AS `man_exad`,`historiaclinica`.`diagnosticos`.`pat_pul` AS `pat_pul`,`historiaclinica`.`diagnosticos`.`pla_bla` AS `pla_bla`,`historiaclinica`.`diagnosticos`.`pla_cal` AS `pla_cal`,`historiaclinica`.`diagnosticos`.`flu_den` AS `flu_den`,`historiaclinica`.`diagnosticos`.`otr_exad` AS `otr_exad`,`historiaclinica`.`diagnosticos`.`obs_exad` AS `obs_exad`,`historiaclinica`.`diagnosticos`.`cau_ext` AS `cau_ext`,`historiaclinica`.`diagnosticos`.`fin_con` AS `fin_con`,`historiaclinica`.`diagnosticos`.`dia` AS `dia`,`historiaclinica`.`diagnosticos`.`pro` AS `pro`,`historiaclinica`.`diagnosticos`.`ope_tra` AS `ope_tra`,`historiaclinica`.`diagnosticos`.`end_tra` AS `end_tra`,`historiaclinica`.`diagnosticos`.`per_tra` AS `per_tra`,`historiaclinica`.`diagnosticos`.`pro_tra` AS `pro_tra`,`historiaclinica`.`diagnosticos`.`cir_tra` AS `cir_tra`,`historiaclinica`.`diagnosticos`.`ort_tra` AS `ort_tra`,`historiaclinica`.`diagnosticos`.`exo_tra` AS `exo_tra`,`historiaclinica`.`diagnosticos`.`med_ora` AS `med_ora`,`historiaclinica`.`diagnosticos`.`otra_tra` AS `otra_tra` from ((((`historiaclinica`.`pacientes` join `historiaclinica`.`personas`) join `historiaclinica`.`anamnesis`) join `historiaclinica`.`exaestomatologicos`) join `historiaclinica`.`diagnosticos`) where ((`historiaclinica`.`pacientes`.`id_per` = `historiaclinica`.`personas`.`id_per`) and (`historiaclinica`.`anamnesis`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`) and (`historiaclinica`.`exaestomatologicos`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`) and (`historiaclinica`.`diagnosticos`.`id_pac` = `historiaclinica`.`pacientes`.`id_pac`));
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura para la vista `vistapacientes`
+-- 
+DROP TABLE IF EXISTS `vistapacientes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `historiaclinica`.`vistapacientes` AS select `historiaclinica`.`pacientes`.`id_pac` AS `id_pac`,`historiaclinica`.`pacientes`.`id_per` AS `id_per`,`historiaclinica`.`personas`.`ced_per` AS `ced_per`,`historiaclinica`.`personas`.`nom_per` AS `nom_per`,`historiaclinica`.`personas`.`ape_per` AS `ape_per`,`historiaclinica`.`personas`.`fec_nac` AS `fec_nac`,`historiaclinica`.`personas`.`edad_per` AS `edad_per`,`historiaclinica`.`personas`.`tel_per` AS `tel_per`,`historiaclinica`.`personas`.`dir_per` AS `dir_per`,`historiaclinica`.`personas`.`sex_per` AS `sex_per`,`historiaclinica`.`personas`.`est_civ` AS `est_civ`,`historiaclinica`.`personas`.`mail_per` AS `mail_per`,`historiaclinica`.`personas`.`rep_per` AS `rep_per`,`historiaclinica`.`personas`.`fec_ing` AS `fec_ing`,`historiaclinica`.`personas`.`rut_ima` AS `rut_ima`,`historiaclinica`.`personas`.`imagen` AS `imagen` from (`historiaclinica`.`pacientes` join `historiaclinica`.`personas`) where (`historiaclinica`.`pacientes`.`id_per` = `historiaclinica`.`personas`.`id_per`);
+
+-- 
+-- Filtros para las tablas descargadas (dump)
+-- 
+
+-- 
+-- Filtros para la tabla `anamnesis`
+-- 
+ALTER TABLE `anamnesis`
+  ADD CONSTRAINT `FK_anamnesis_pacientes` FOREIGN KEY (`id_pac`) REFERENCES `pacientes` (`id_pac`);
+
+-- 
+-- Filtros para la tabla `detalleafeccionespac`
+-- 
+ALTER TABLE `detalleafeccionespac`
+  ADD CONSTRAINT `FK_detalleafeccionespac_afecciones` FOREIGN KEY (`id_afe`) REFERENCES `afecciones` (`id_afe`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_detalleafeccionespac_pacientes` FOREIGN KEY (`id_pac`) REFERENCES `pacientes` (`id_pac`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Filtros para la tabla `detallediagnostico`
+-- 
+ALTER TABLE `detallediagnostico`
+  ADD CONSTRAINT `FK_detallediagnostico_diagnostico` FOREIGN KEY (`id_dia`) REFERENCES `diagnosticos` (`id_dia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_detallediagnostico_DX` FOREIGN KEY (`id_dx`) REFERENCES `dx` (`id_dx`);
+
+-- 
+-- Filtros para la tabla `detalletratamientos`
+-- 
+ALTER TABLE `detalletratamientos`
+  ADD CONSTRAINT `FK_detalletratamientos_prod` FOREIGN KEY (`id_prod`) REFERENCES `productos` (`id_prod`),
+  ADD CONSTRAINT `FK_detalletratamientos_tra` FOREIGN KEY (`id_tra`) REFERENCES `tratamientos` (`id_tra`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Filtros para la tabla `diagnosticos`
+-- 
+ALTER TABLE `diagnosticos`
+  ADD CONSTRAINT `FK_diagnosticos_pacientes` FOREIGN KEY (`id_pac`) REFERENCES `pacientes` (`id_pac`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Filtros para la tabla `exaestomatologicos`
+-- 
+ALTER TABLE `exaestomatologicos`
+  ADD CONSTRAINT `FK_exaestomatologicos_paciente` FOREIGN KEY (`id_pac`) REFERENCES `pacientes` (`id_pac`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Filtros para la tabla `imagencita`
+-- 
+ALTER TABLE `imagencita`
+  ADD CONSTRAINT `FK_imagencita_cita` FOREIGN KEY (`id_cit`) REFERENCES `citas` (`id_cit`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Filtros para la tabla `pacientes`
+-- 
+ALTER TABLE `pacientes`
+  ADD CONSTRAINT `FK_pacientes_personas` FOREIGN KEY (`id_per`) REFERENCES `personas` (`id_per`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Filtros para la tabla `usuarios`
+-- 
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `FK_usuarios_personas` FOREIGN KEY (`id_per`) REFERENCES `personas` (`id_per`) ON DELETE CASCADE ON UPDATE CASCADE;

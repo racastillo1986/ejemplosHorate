@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9812c7fe-9bb4-43a8-845b-9eb09ef7a355">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+ `candidatos`.`id_can` AS `id_can`,
+ `datospersonales`.`ced_per` AS `ced_per`,
+ `datospersonales`.`nom_per` AS `nom_per`,
+ `datospersonales`.`mail_per` AS `mail_per`,
+ `datospersonales`.`tel_per` AS `tel_per`,
+ `datospersonales`.`edad_per` AS `edad_per`,
+ `candidatos`.`dig_can` AS `dig_can`,
+ `candidatos`.`pri_sec` AS `pri_sec`,
+ `candidatos`.`can_can` AS `can_can`,
+ `candidatos`.`ced_asi` AS `ced_asi`,
+ `candidatos`.`nom_asi` AS `nom_asi`,
+ `candidatos`.`tel_asi` AS `tel_asi`,
+ `candidatos`.`mail_asi` AS `mail_asi`
+FROM
+(`candidatos` JOIN
+`datospersonales`)
+WHERE
+(`candidatos`.`ced_per` = `datospersonales`.`ced_per`)]]>
+	</queryString>
+	<field name="id_can" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ced_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nom_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mail_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tel_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="edad_per" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dig_can" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pri_sec" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="can_can" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ced_asi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nom_asi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tel_asi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mail_asi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="128" y="0" width="300" height="26" uuid="00c71f70-6561-448a-959c-152c708842e4"/>
+				<textElement textAlignment="Justified">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO GENERAL DE CANDIDATOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="5" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="6" width="555" height="30" uuid="3e19b67e-38b3-46dd-a84d-170fa9eab0ce"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="10" width="51" height="20" uuid="a6be4343-ab6b-4258-8b45-d3bc03bf79f6"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="10" width="287" height="20" uuid="1722b778-7fdd-4592-b0c9-dadff1e95c5d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="10" width="64" height="20" uuid="3ebbb09a-baa5-4bd3-a32a-47dfbf9f0c4a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="10" width="57" height="20" uuid="026db225-fecb-47dc-a783-8ba9b7e078c3"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="10" width="96" height="20" uuid="e71a4d5d-3319-489e-99fe-152aa4cae9b2"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARROQUIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement x="470" y="1" width="85" height="19" uuid="f7649c50-cf18-4ae5-b644-b74122e32d7c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="402" y="1" width="57" height="19" uuid="3a4081c5-596d-48de-9400-fa5aa1dffe43"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="338" y="1" width="64" height="19" uuid="a7cc1371-33d4-46c5-b096-b25fb05ab645"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="54" y="1" width="284" height="19" uuid="f8aa5bfc-e494-4e65-b311-8067c161c181"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="1" width="51" height="19" uuid="e78019f0-b7ef-4564-bfc7-2464e5729249"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="51" height="20" uuid="8e602ef6-a22a-432f-9e8a-70930d05c570"/>
+				<textFieldExpression><![CDATA[$F{ced_per}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="1" width="284" height="19" uuid="2f0938b9-45f2-41f0-afde-89b7ac2fe779"/>
+				<textFieldExpression><![CDATA[$F{nom_per}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="0" width="64" height="20" uuid="cf380172-7516-4b41-bc31-313febc63a4a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tel_per}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="1" width="57" height="20" uuid="7a00ce13-ab1f-4397-b0ae-eabdd73bad72"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{can_can}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="1" width="96" height="20" uuid="1029ad6f-9605-45f2-8b2d-097ceff8c2c5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{edad_per}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>
