@@ -2,12 +2,11 @@ package com.bot.demo;
 
 //import org.springframework.boot.SpringApplication;
 
-import me.legrange.mikrotik.impl.ApiConnectionImpl;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import me.legrange.mikrotik.ApiConnection;
+import me.legrange.mikrotik.ApiConnectionException;
 import me.legrange.mikrotik.MikrotikApiException;
 import me.legrange.mikrotik.ResultListener;
-import me.legrange.mikrotik.ApiConnectionException;
+import me.legrange.mikrotik.impl.ApiConnectionImpl;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.net.SocketFactory;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class BotRcApplication {
                 public void receive(Map<String, String> result) {
                     // Procesar los resultados de los clientes DHCP
                     System.out.println("Clientes DHCP registrados:");
-                    
+
                     //Map es como un array pero con clave y valor
                     for (Map.Entry<String, String> entry : result.entrySet()) {
                         System.out.println(entry.getKey() + ": " + entry.getValue());
