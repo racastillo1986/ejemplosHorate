@@ -1,0 +1,77 @@
+Comandos comunes de MikroTik
+
+Listar interfaces de red Este comando lista todas las interfaces de red de tu router, como interfaces Ethernet, Wi-Fi, etc.
+
+/interface print
+
+Obtener información del sistema Si deseas obtener información general sobre el sistema del router, como la versión de RouterOS, la carga del CPU, la memoria, etc., puedes usar:
+
+/system resource print
+
+Listar las IPs configuradas Para obtener las direcciones IP asignadas a las interfaces de tu router:
+
+/ip address print
+
+Listar rutas (routes) Este comando te muestra las rutas configuradas en el router:
+
+/ip route print
+
+Ver los clientes DHCP Si quieres obtener la lista de clientes DHCP asignados, puedes usar:
+
+/ip dhcp-server lease print
+
+Listar las conexiones de firewall Para ver las reglas de firewall configuradas en el router:
+
+/ip firewall filter print
+
+Ver el estado de los interfaces de red Este comando te permite ver el estado de todas las interfaces (up/down) en el router:
+
+/interface ethernet print
+
+Obtener la tabla ARP Este comando te da información sobre las direcciones IP y sus correspondientes direcciones MAC:
+
+/ip arp print
+
+Ver la tabla de NAT Si tienes configurado el NAT, puedes listar las reglas de NAT en el router:
+
+/ip firewall nat print
+
+Obtener las conexiones activas Este comando muestra todas las conexiones activas del router, ideal para ver qué dispositivos están usando la red:
+
+/ip firewall connection print
+
+Ver la configuración de DNS Si deseas obtener la configuración del servidor DNS:
+
+/ip dns print
+
+Ver el tráfico por interfaz Este comando te muestra las estadísticas de tráfico por cada interfaz:
+
+/interface ethernet monitor [nombre de la interfaz] once
+
+Ver el estado de PPPoE Si tienes configurado un servidor PPPoE, puedes ver las conexiones activas con:
+
+/interface pppoe-server server print
+
+Ver la configuración del Wi-Fi Si tienes configuradas interfaces Wi-Fi, puedes ver los detalles con:
+
+/interface wireless print
+
+Ver el estado de la VPN Para obtener el estado de las conexiones VPN configuradas (por ejemplo, IPsec):
+
+/interface ipsec active-peers print
+
+Listar los usuarios de RouterOS Para listar los usuarios configurados en el router:
+
+/user print
+
+Listar los discos de almacenamiento Si tienes discos configurados en el router, este comando te muestra la información:
+
+/disk print
+
+Obtener estadísticas de tráfico Para obtener estadísticas de tráfico de las interfaces:
+
+/interface print stats
+
+Obtener los logs del router Si necesitas ver los logs del sistema para depuración o información:
+
+/log print
