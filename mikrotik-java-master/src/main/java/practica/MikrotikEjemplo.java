@@ -26,7 +26,6 @@ public class MikrotikEjemplo {
             connection.login(user, password);
             System.out.println("********** Login ok chingao *********");
 
-            // Ejecutar el comando para obtener los clientes DHCP
             //comando para clientes por ip: /ip/arp/print
             //comando para clientes dhcp:/ip/dhcp-server/lease/print
             connection.execute("/ip/arp/print", new ResultListener() {
