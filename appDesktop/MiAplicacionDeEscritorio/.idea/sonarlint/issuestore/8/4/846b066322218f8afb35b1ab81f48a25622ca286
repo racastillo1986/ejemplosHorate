@@ -1,17 +1,17 @@
 
 
-java:S1192b"LDefine a constant instead of duplicating this literal "Advertencia" 4 times.(Ûõè€8¶ïãÈÉ2J$e7aaa239-dee9-472b-a242-b269e673c606
+java:S1192`"LDefine a constant instead of duplicating this literal "Advertencia" 4 times.(Ûõè€8¶ïãÈÉ2J$dcd11a77-ff16-4ff8-8c25-40bbe3e8540d
 k
-java:S1604="(Make this anonymous inner class a lambda(ï¹ò×8¸ïãÈÉ2J$9847113e-01aa-45d2-aa3d-6f4a634a2cdf
+java:S1604;"(Make this anonymous inner class a lambda(ï¹ò×8¸ïãÈÉ2J$bc62434a-05b5-446f-9481-5db793bb193b
 p
-java:S1604h"(Make this anonymous inner class a lambda(†¥åèÿÿÿÿÿ8¸ïãÈÉ2J$25fd560e-05cd-484c-9326-a29f173c1807
+java:S1604f"(Make this anonymous inner class a lambda(†¥åèÿÿÿÿÿ8¸ïãÈÉ2J$98ca8352-7fd8-4a99-8ce0-7644fdb47991
 k
-java:S1604v"(Make this anonymous inner class a lambda(­ó¡8¹ïãÈÉ2J$bf771433-aed5-4be1-ba15-26cdd05ef147
+java:S1604t"(Make this anonymous inner class a lambda(­ó¡8¹ïãÈÉ2J$4e6a8f14-2fe3-4d86-8c8f-6a8ea5918295
 l
-java:S1604"(Make this anonymous inner class a lambda(‚â8¹ïãÈÉ2J$702bc3ca-d62c-47d0-892d-93fe1fd6c890
-F
-java:S1604š"(Make this anonymous inner class a lambda(ü†¥Õ8ÒÛäÈÉ2
+java:S1604"(Make this anonymous inner class a lambda(‚â8¹ïãÈÉ2J$567c109a-70ef-4e98-9844-0a9fc43b0c99
+l
+java:S1604˜"(Make this anonymous inner class a lambda(ü†¥Õ8ÒÛäÈÉ2J$6e92088e-bdaf-407c-ab50-08f71deecb2c
 •
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(Çµí‘8ÛïãÈÉ2J$dfaef352-c609-4c21-be46-54f485f1441f
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(Çµí‘8ÛïãÈÉ2J$52947e90-e4b3-4914-9b24-4f9270d1eb31
 Œ
-java:S3252"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8ßïãÈÉ2J$3249b031-d6d4-487e-82cc-d514da167bf4
+java:S3252"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8ßïãÈÉ2J$d97c5cb6-b5f6-4b0a-a056-8b9b3fbc2d19

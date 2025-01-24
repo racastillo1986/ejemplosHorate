@@ -1,46 +1,40 @@
-package com.bot.demo;
+package practica;
 
-//import org.springframework.boot.SpringApplication;
-
-import lombok.extern.slf4j.Slf4j;
+import examples.Config;
 import me.legrange.mikrotik.ApiConnectionException;
 import me.legrange.mikrotik.MikrotikApiException;
 import me.legrange.mikrotik.ResultListener;
 import me.legrange.mikrotik.impl.ApiConnectionImpl;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.net.SocketFactory;
 import java.util.Map;
 
-
-@SpringBootApplication
-@Slf4j
-public class BotRcApplication {
+public class MikrotikEjemplo {
 
     public static void main(String[] args) throws MikrotikApiException {
+        System.out.println("Hola chingao - Iniciando prueba");
 
-        //SpringApplication.run(BotRcApplication.class, args);
-        log.info("Hola chingao...");
+        String ip = Config.HOST;
+        String user = Config.USERNAME;
+        String password = Config.PASSWORD;
 
-        String ip = "192.168.1.1";  // IP del router MikroTik
-        String user = "admin";       // Usuario del router
-        String password = "your_password"; // Contraseña del router
-
-        // conexión a MikroTik chingao
         try {
             ApiConnectionImpl connection = (ApiConnectionImpl) ApiConnectionImpl.connect(SocketFactory.getDefault(), ip, 8728, 5000);
-            System.out.println("Conexión exitosa al MikroTik");
+            System.out.println("********* Conexion exitosa chingao **********");
 
-            // login
+            //login
             connection.login(user, password);
-            System.out.println("Login ok");
+            System.out.println("********** Login ok chingao *********");
 
             // Ejecutar el comando para obtener los clientes DHCP
-            connection.execute("/ip/dhcp-server/lease/print", new ResultListener() {
+            //comando para clientes por ip: /ip/arp/print
+            //comando para clientes dhcp:/ip/dhcp-server/lease/print
+            connection.execute("/ip/arp/print", new ResultListener() {
+
                 @Override
                 public void receive(Map<String, String> result) {
-                    // Procesar los resultados de los clientes DHCP
-                    System.out.println("Clientes DHCP registrados:");
+                    // Procesar los resultados de los clientes por IP
+                    System.out.println("Clientes por IP registrados:");
 
                     //Map es como un array pero con clave y valor
                     for (Map.Entry<String, String> entry : result.entrySet()) {
@@ -61,10 +55,9 @@ public class BotRcApplication {
                 }
             });
 
-            // Cerrar la conexión
+            // cerrar la conexion no olvide esto chingao
             connection.close();
-            System.out.println("Conexión cerrada");
-
+            System.out.println("********** Conexion cerrada OK **********");
         } catch (ApiConnectionException e) {
             // Manejo de la excepción ApiConnectionException
             e.printStackTrace();
@@ -72,8 +65,6 @@ public class BotRcApplication {
             // Manejo de la excepción MikrotikApiException
             e.printStackTrace();
         }
-
-
     }
 
 }

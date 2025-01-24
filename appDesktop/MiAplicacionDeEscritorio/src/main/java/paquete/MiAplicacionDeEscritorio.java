@@ -46,16 +46,14 @@ public class MiAplicacionDeEscritorio {
         // Crear el modelo de la tabla con datos "quemados"
         String[] columnNames = {"ID", "Nombre"};
         Object[][] data = {
-                {1, "Juan"},
-                {2, "Ana"},
-                {3, "Carlos"},
-                {4, "Marta"}
+                {1, "Juan"}
         };
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
         // Crear la tabla con el modelo de datos
         JTable table = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(table); // Colocar la tabla dentro de un JScrollPane para que sea desplazable
+        // Colocar la tabla dentro de un JScrollPane para que sea desplazable
+        JScrollPane scrollPane = new JScrollPane(table);
 
         // Acción para agregar un registro a la tabla
         buttonAdd.addActionListener(new ActionListener() {
